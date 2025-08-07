@@ -11,6 +11,7 @@ current_page = query_params.get("page", "home")
 def go_to(page):
     st.query_params.page = page
 
+
 # ------------------- Pages -------------------
 
 # -------- HOME --------
@@ -45,42 +46,79 @@ def page_home():
     st.markdown("### 🔗 Connect with Ashwik Bire")
     st.markdown("[🔗 LinkedIn - Click here](https://linkedin.com/in/ashwik-bire-b2a000186)")
 
+
 # -------- DATA SCIENCE --------
 def page_data_science():
     st.title("📊 Data Science Learning")
     st.video("https://www.youtube.com/watch?v=Gv9_4yMHFhI")
 
     st.markdown("""
-    Build your foundation in:
-    - 🐍 Python basics with Pandas/NumPy
-    - 📊 Data cleaning and visualizations
-    - 🧠 Machine learning with Scikit-learn
+    Data Science is an interdisciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from structured and unstructured data.
+
+    **Key learning areas include:**
+    - 🐍 Python programming with libraries like Pandas and NumPy for data manipulation.
+    - 📊 Data cleaning, exploratory data analysis, and effective visualization.
+    - 🤖 Machine learning concepts, including supervised, unsupervised learning, and model evaluation.
     """)
+
+    with st.expander("💡 Why Data Science?"):
+        st.markdown("""
+        Data-driven decisions are now at the core of successful organizations worldwide. Data Scientists transform raw data into actionable insights that drive innovation, optimize operations, and create competitive advantages.
+
+        This course will help you understand the lifecycle of data science projects—from data collection and cleaning to model building and deployment.
+        """)
 
     st.subheader("💡 Concepts Covered")
     col1, col2 = st.columns(2)
-    col1.markdown("• Python syntax\n• DataFrames\n• Data viz tools")
-    col2.markdown("• Supervised vs Unsupervised\n• Model training\n• Accuracy metrics")
+    col1.markdown("""
+    • Python & Jupyter notebooks basics  
+    • Data structures & data manipulation  
+    • Data visualization with Matplotlib and Seaborn  
+    • Introduction to statistics and probability  
+    """)
+    col2.markdown("""
+    • Machine learning workflows  
+    • Regression, classification, clustering algorithms  
+    • Model validation and tuning  
+    • Ethics and responsible AI  
+    """)
 
-    with st.expander("💻 Example: Linear Regression"):
+    with st.expander("📚 Read More: Core Python for Data Science"):
+        st.markdown("""
+        Python is the most popular language in data science because of its readability and vast ecosystem. Learning Python essentials—like lists, dictionaries, functions, and modules—is crucial for performing complex data operations efficiently.
+
+        Libraries like Pandas provide powerful data structures and functions making data cleaning and analysis straightforward.
+        """)
+
+    with st.expander("💻 Example: Linear Regression in Python"):
         st.code("""
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 
-data = {'exp': [1,2,3,4], 'salary': [30000, 35000, 40000, 45000]}
+data = {'Experience': [1,2,3,4,5], 'Salary': [45000, 50000, 60000, 65000, 70000]}
 df = pd.DataFrame(data)
+
+X = df[['Experience']]
+y = df['Salary']
+
 model = LinearRegression()
-model.fit(df[['exp']], df['salary'])
-print(model.predict([[5]]))  # Predict salary for 5 years
+model.fit(X, y)
+
+predicted_salary = model.predict([[6]])
+print(f'Predicted salary for 6 years experience: ${predicted_salary[0]:.2f}')
         """)
 
     with st.expander("🧠 Quiz"):
-        answer = st.radio("Which ML type uses labeled data?", ["Unsupervised", "Supervised"])
+        answer = st.radio("Which machine learning approach uses labeled training data?", ["Unsupervised", "Supervised", "Reinforcement"])
         if st.button("Submit", key="ds_quiz_submit"):
-            st.success("✅ Correct!") if answer == "Supervised" else st.error("❌ Nope, try again.")
+            if answer == "Supervised":
+                st.success("✅ Correct! Supervised learning uses labeled data.")
+            else:
+                st.error("❌ Incorrect, try again.")
 
-    st.markdown("📥 [Download Cheat Sheet](https://www.datacamp.com/community/blog/download-data-science-cheat-sheet)")
+    st.markdown("📥 [Download Data Science Cheat Sheet](https://www.datacamp.com/community/blog/download-data-science-cheat-sheet)")
     st.button("⬅️ Back to Home", on_click=lambda: go_to("home"))
+
 
 # -------- DATA ANALYTICS --------
 def page_data_analytics():
@@ -88,56 +126,115 @@ def page_data_analytics():
     st.video("https://www.youtube.com/watch?v=9J9gkqFtyYg")
 
     st.markdown("""
-    Learn how to:
-    - Clean and explore structured data
-    - Use SQL/Pandas for analysis
-    - Build dashboards in Excel/Tableau
+    Data Analytics involves examining data sets to uncover patterns, trends, and insights to support decision-making.
+
+    **Focus areas include:**
+    - Data cleaning and preparation to ensure high quality.
+    - Data summarization and visualization for storytelling.
+    - Use of SQL and BI tools like Power BI and Tableau for interactive dashboards.
     """)
+
+    with st.expander("💡 Importance of Data Analytics"):
+        st.markdown("""
+        Analytics enables organizations to convert data into knowledge. Effective analytics supports business intelligence, operational efficiency, and competitive strategy.
+
+        You'll learn how to transform raw data into actionable insights using modern tools and techniques.
+        """)
 
     st.subheader("💡 Topics Covered")
     col1, col2 = st.columns(2)
-    col1.markdown("• Descriptive Analytics\n• Exploratory Data Analysis\n• Data Profiles")
-    col2.markdown("• Predictive Analytics\n• SQL Queries\n• Data Cleaning")
+    col1.markdown("""
+    • Types of analytics: descriptive, diagnostic, predictive, prescriptive   
+    • Exploratory data analysis (EDA) techniques  
+    • Data visualization best practices  
+    • SQL fundamentals for querying  
+    """)
+    col2.markdown("""
+    • Building dashboards with Power BI/Tableau  
+    • Python toolkits: Pandas for data handling, Matplotlib/Seaborn for plots  
+    • Reporting and communicating insights effectively  
+    """)
 
-    with st.expander("💻 Sample Code"):
-        st.code("""
-import pandas as pd
-df = pd.read_csv("sales.csv")
-df.dropna(inplace=True)
-print(df.groupby("region")["revenue"].sum().nlargest(3))
+    with st.expander("📚 Read More: Power BI Fundamentals"):
+        st.markdown("""
+        Power BI helps visualize and share insights through interactive reports. You will learn to connect to various data sources, transform data using Power Query, and create dashboards.
+
+        Understanding how to interpret these dashboards is essential for data-driven decisions.
         """)
 
-    with st.expander("🧠 Quiz"):
-        q = st.radio("Which type predicts trends?", ["Descriptive", "Predictive"])
-        if st.button("Submit", key="da_quiz_submit"):
-            st.success("✅ Great!") if q == "Predictive" else st.error("❌ Not quite.")
+    with st.expander("💻 Example: Basic Sales Data Analysis in Python"):
+        st.code("""
+import pandas as pd
 
-    st.markdown("📥 [Download Cheat Sheet](https://www.analyticsvidhya.com/wp-content/uploads/2020/03/Data-Analytics-Cheat-Sheet.pdf)")
+sales_df = pd.read_csv('sales_data.csv')
+sales_df_clean = sales_df.dropna()
+top_products = sales_df_clean.groupby('Product')['Revenue'].sum().nlargest(5)
+
+print(top_products)
+        """)
+
+    with st.expander("🧠 Quiz: Analytics Basics"):
+        q = st.radio("Which analytics type forecasts future outcomes?", ["Descriptive", "Predictive", "Diagnostic"])
+        if st.button("Submit", key="da_quiz_submit"):
+            if q == "Predictive":
+                st.success("✅ Correct! Predictive analytics forecasts future events.")
+            else:
+                st.error("❌ Incorrect. Try again.")
+
+    st.markdown("📥 [Download Data Analytics Cheat Sheet](https://www.analyticsvidhya.com/wp-content/uploads/2020/03/Data-Analytics-Cheat-Sheet.pdf)")
     st.button("⬅️ Back to Home", on_click=lambda: go_to("home"))
+
 
 # -------- EXCEL --------
 def page_excel():
-    st.title("📑 Excel Essentials")
+    st.title("📑 Microsoft Excel Essentials")
     st.video("https://www.youtube.com/watch?v=8cG-VeN94Og")
 
     st.markdown("""
-    Sharpen your spreadsheet skills:
-    - Master formulas like SUM, IF, VLOOKUP
-    - Analyze with pivot tables
-    - Automate tasks using Macros
+    Excel empowers you to organize, calculate, and visualize data effectively.
+
+    Key learning outcomes:
+    - Master formulas like SUM, AVERAGE, IF, VLOOKUP, and INDEX-MATCH.
+    - Create PivotTables and PivotCharts for summarizing data.
+    - Automate tasks and create custom functions using Macros and VBA.
     """)
 
-    st.subheader("💡 Key Features")
+    with st.expander("💡 Why Excel is Important"):
+        st.markdown("""
+        Excel remains one of the most widely used tools for data analysis across industries due to its flexibility and ease of use. Whether for financial modeling, reporting, or data visualization, proficiency in Excel is invaluable.
+
+        Through this course, you'll gain skills to use Excel as a powerful analytics tool.
+        """)
+
+    st.subheader("🔑 Key Features Covered")
     col1, col2 = st.columns(2)
-    col1.markdown("• Basic formulas (SUM, IF)\n• Sorting and filtering\n• Conditional formatting")
-    col2.markdown("• Pivot tables\n• Charts\n• Macros/VBA basics")
+    col1.markdown("""
+    • Cell referencing and formulas  
+    • Lookup functions: VLOOKUP & INDEX-MATCH  
+    • Data validation and conditional formatting  
+    """)
+    col2.markdown("""
+    • PivotTables and slicers  
+    • Charts and dashboards  
+    • Introduction to Macros and VBA scripting  
+    """)
 
-    with st.expander("🧠 Quiz"):
-        ans = st.radio("Which function looks horizontally?", ["VLOOKUP", "HLOOKUP"])
-        if st.button("Submit", key="xl_quiz_submit"):
-            st.success("✅ You're right!") if ans == "HLOOKUP" else st.error("❌ Try again.")
+    with st.expander("📚 Read More: PivotTables Explained"):
+        st.markdown("""
+        PivotTables help summarize large datasets with drag-and-drop ease. You learn to aggregate data by categories, filter, and analyze trends quickly.
 
-    st.markdown("📥 [Download Cheat Sheet](https://exceljet.net/sites/default/files/ExcelJet_Excel_Cheat_Sheet_PDF.pdf)")
+        This feature amplifies Excel’s power in transforming raw data into meaningful summaries.
+        """)
+
+    with st.expander("🧠 Quiz: Excel Basics"):
+        ans = st.radio("Which function is used for horizontal lookup?", ["VLOOKUP", "HLOOKUP", "INDEX"])
+        if st.button("Submit", key="excel_quiz_submit"):
+            if ans == "HLOOKUP":
+                st.success("✅ Correct! HLOOKUP searches rows horizontally.")
+            else:
+                st.error("❌ Incorrect, try again.")
+
+    st.markdown("📥 [Download Excel Cheat Sheet](https://exceljet.net/sites/default/files/ExcelJet_Excel_Cheat_Sheet_PDF.pdf)")
     st.button("⬅️ Back to Home", on_click=lambda: go_to("home"))
 
 
