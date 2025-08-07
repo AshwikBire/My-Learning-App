@@ -11,96 +11,119 @@ current_page = query_params.get("page", "home")
 def go_to(page):
     st.query_params.page = page
 
+def section_header(title):
+    st.markdown(f"<h2 style='color:#005B96; border-bottom: 2px solid #005B96; padding-bottom:8px;'>{title}</h2>", unsafe_allow_html=True)
+
+def card_button(label, key, callback):
+    """Render a big button with card-like style."""
+    style = """
+        <style>
+        .stButton>button {
+            background-color: #0078D4;
+            color: white;
+            height: 4rem;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .stButton>button:hover {
+            background-color: #005A9E;
+            color: #E1EFFE;
+        }
+        </style>
+    """
+    st.markdown(style, unsafe_allow_html=True)
+    st.button(label, key=key, on_click=callback)
+
+def box_highlight(content):
+    st.markdown(f"""
+    <div style="background-color:#E6F0FA; padding:10px 15px; border-radius:10px; margin-bottom:15px;">
+    {content}
+    </div>
+    """, unsafe_allow_html=True)
+
 
 # ------------------- Pages -------------------
 
 # -------- HOME --------
 def page_home():
-    st.title("Learn Data Science, Analytics, Excel, Power BI & AI")
-    st.subheader("All-in-One Learning Platform for Beginners & Professionals")
+    section_header("Welcome to Data Science & Analytics with Ashwik Bire")
 
-    # Banner image from local repo
     st.image("banner.png", caption="Data Science & Analytics Course with Ashwik Bire", use_container_width=True)
 
-    st.markdown("### Choose a Learning Path:")
-    col1, col2, col3, col4, col5 = st.columns(5)
+    st.markdown("<p style='font-size:1.1rem;'>Select a learning path from the options below to get started. Each path includes detailed tutorials, quizzes, and resources.</p>", unsafe_allow_html=True)
+
+    col1, col2, col3, col4, col5 = st.columns(5, gap="large")
     with col1:
-        st.button("Data Science", on_click=lambda: go_to("data_science"))
+        card_button("Data Science", "btn_ds", lambda: go_to("data_science"))
     with col2:
-        st.button("Data Analytics", on_click=lambda: go_to("data_analytics"))
+        card_button("Data Analytics", "btn_da", lambda: go_to("data_analytics"))
     with col3:
-        st.button("Microsoft Excel", on_click=lambda: go_to("excel"))
+        card_button("Microsoft Excel", "btn_excel", lambda: go_to("excel"))
     with col4:
-        st.button("Power BI", on_click=lambda: go_to("power_bi"))
+        card_button("Power BI", "btn_pbi", lambda: go_to("power_bi"))
     with col5:
-        st.button("Artificial Intelligence (AI)", on_click=lambda: go_to("ai"))
+        card_button("Artificial Intelligence", "btn_ai", lambda: go_to("ai"))
 
     st.divider()
 
-    st.subheader("Featured YouTube Tutorials")
-    col_a, col_b, col_c, col_d, col_e = st.columns(5)
-    col_a.video("https://www.youtube.com/watch?v=IBnLsKOhpyU")  # Data Science Full Course 2025
-    col_b.video("https://www.youtube.com/watch?v=DsI1vG-kXR8")  # Data Analytics 2025
-    col_c.video("https://www.youtube.com/watch?v=7ny5ljw6NbI")  # Excel Full Course 2025
-    col_d.video("https://www.youtube.com/watch?v=AGrl-H87pRU")  # Power BI Full Tutorial
-    col_e.video("https://www.youtube.com/watch?v=2ePf9rue1Ao")   # AI Full Course for Beginners
+    section_header("Featured Tutorials")
+
+    col_a, col_b, col_c, col_d, col_e = st.columns(5, gap="medium")
+    col_a.video("https://www.youtube.com/watch?v=IBnLsKOhpyU")
+    col_b.video("https://www.youtube.com/watch?v=DsI1vG-kXR8")
+    col_c.video("https://www.youtube.com/watch?v=7ny5ljw6NbI")
+    col_d.video("https://www.youtube.com/watch?v=AGrl-H87pRU")
+    col_e.video("https://www.youtube.com/watch?v=2ePf9rue1Ao")
 
     st.divider()
-    st.markdown("Connect with Ashwik Bire")
-    st.markdown("[LinkedIn - Click here](https://linkedin.com/in/ashwik-bire-b2a000186)")
 
+    st.markdown("<p style='font-size:1.1rem; font-weight:bold;'>Connect with Ashwik Bire on <a href='https://linkedin.com/in/ashwik-bire-b2a000186' target='_blank' style='color:#0078D4;'>LinkedIn</a> for updates and mentorship.</p>", unsafe_allow_html=True)
 
 # -------- DATA SCIENCE --------
 def page_data_science():
-    st.title("Data Science Learning")
-    st.video("https://www.youtube.com/watch?v=IBnLsKOhpyU")  # Updated full course Data Science video
+    section_header("Data Science Learning")
 
-    st.markdown("""
-    Data Science is an interdisciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from structured and unstructured data.
+    st.video("https://www.youtube.com/watch?v=IBnLsKOhpyU")
 
-    **Key learning areas include:**
-    - Python programming with libraries like Pandas and NumPy for data manipulation.
-    - Data cleaning, exploratory data analysis, and effective visualization.
-    - Machine learning concepts, including supervised, unsupervised learning, and model evaluation.
-    - Data Engineering fundamentals for building data pipelines.
-    """)
+    intro_text = """
+    <p style='font-size:1.1rem;'>Data Science unlocks insights from complex data by using statistics, programming, and algorithms. Key pathways in this domain include data cleaning, visualization, machine learning, and data engineering.</p>
+    """
+    st.markdown(intro_text, unsafe_allow_html=True)
 
     with st.expander("Why Data Science?"):
         st.markdown("""
-        Data-driven decisions are now at the core of successful organizations worldwide. Data Scientists transform raw data into actionable insights that drive innovation, optimize operations, and create competitive advantages.
-
-        This course helps you understand the lifecycle of data science projects—from data collection and cleaning to model building and deployment.
+        Data science enables data-driven decision-making, powering innovation and competitive advantages worldwide.
+        Understand how data is collected, cleaned, analyzed, and modeled in real-world applications.
         """)
 
     st.subheader("Concepts Covered")
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2, gap="large")
     col1.markdown("""
-    • Python & Jupyter notebooks basics  
-    • Data structures & data manipulation  
-    • Data visualization with Matplotlib and Seaborn  
-    • Introduction to statistics and probability  
-    • Data wrangling techniques and handling missing data  
+    - Python & Jupyter basics  
+    - Data manipulation with Pandas  
+    - Data visualization (Matplotlib, Seaborn)  
+    - Intro to statistics & probability  
+    - Data wrangling & cleaning  
     """)
     col2.markdown("""
-    • Machine learning workflows  
-    • Regression, classification, clustering algorithms  
-    • Model validation and hyperparameter tuning  
-    • Ethics and responsible AI  
-    • Introduction to Big Data tools (Spark, Hadoop overview)  
+    - Machine Learning fundamentals  
+    - Regression, classification, clustering  
+    - Model validation and tuning  
+    - Ethics in AI & data science  
+    - Big Data tools overview  
     """)
 
     with st.expander("Read More: Core Python for Data Science"):
         st.markdown("""
-        Python is the most popular language in data science because of its readability and vast ecosystem. Learning Python essentials—like lists, dictionaries, functions, and modules—is crucial for performing complex data operations efficiently.
-
-        Libraries like Pandas provide powerful data structures and functions making data cleaning and analysis straightforward.
+        Python is popular for data science due to its simplicity and powerful libraries. Master lists, dictionaries, and Pandas functions for effective data operations.
         """)
 
     with st.expander("Read More: Data Visualization Best Practices"):
         st.markdown("""
-        Effective data visualization communicates insights clearly and efficiently. Choosing the right chart and using color effectively can highlight key patterns and trends, aiding decision makers to understand data narratives better.
-
-        Learn different types of plots such as histograms, scatter plots, box plots, and heatmaps.
+        Visualizing data helps communicate findings. Learn to choose the right chart, colors, and annotations to convey your insights clearly.
         """)
 
     with st.expander("Example: Linear Regression in Python"):
@@ -123,69 +146,59 @@ print(f'Predicted salary for 6 years experience: ${predicted_salary[0]:.2f}')
 
     with st.expander("Read More: Machine Learning Workflow"):
         st.markdown("""
-        The machine learning workflow involves collecting data, preprocessing, feature engineering, model selection, training, evaluation, and deployment.
-
-        Understanding this pipeline lets you build reliable models and improve them iteratively.
+        Explore the complete ML workflow: data preprocessing, model selection, training, evaluation, and deployment for real-world results.
         """)
 
-    with st.expander("Quiz"):
-        answer = st.radio("Which machine learning approach uses labeled training data?", ["Unsupervised", "Supervised", "Reinforcement"])
-        if st.button("Submit", key="ds_quiz_submit"):
-            if answer == "Supervised":
-                st.success("Correct! Supervised learning uses labeled data.")
-            else:
-                st.error("Incorrect, try again.")
+    box_highlight("<b>Quiz:</b> Which machine learning approach uses labeled training data?")
+    answer = st.radio("", ["Unsupervised", "Supervised", "Reinforcement"], key="ds_quiz", horizontal=True)
+    if st.button("Submit Answer", key="ds_submit"):
+        if answer == "Supervised":
+            st.success("Correct! Supervised learning uses labeled data.")
+        else:
+            st.error("Incorrect, please try again.")
 
     st.markdown("[Download Data Science Cheat Sheet](https://www.datacamp.com/community/blog/download-data-science-cheat-sheet)")
-    st.button("Back to Home", on_click=lambda: go_to("home"))
+
+    st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
 
 
 # -------- DATA ANALYTICS --------
 def page_data_analytics():
-    st.title("Data Analytics Curriculum")
-    st.video("https://www.youtube.com/watch?v=DsI1vG-kXR8")  # Updated analytics resource video
+    section_header("Data Analytics Curriculum")
+    st.video("https://www.youtube.com/watch?v=DsI1vG-kXR8")
 
-    st.markdown("""
-    Data Analytics involves examining data sets to uncover patterns, trends, and insights to support decision-making.
-
-    **Focus areas include:**
-    - Data cleaning and preparation to ensure high quality.
-    - Data summarization and visualization for storytelling.
-    - Use of SQL and BI tools like Power BI and Tableau for interactive dashboards.
-    - Introduction to statistical inference for data-driven decisions.
-    """)
+    intro_text = """
+    <p style='font-size:1.1rem;'>Data Analytics transforms raw information into actionable insights through cleaning, visualization, and summarization using SQL, Python, and BI tools.</p>
+    """
+    st.markdown(intro_text, unsafe_allow_html=True)
 
     with st.expander("Importance of Data Analytics"):
         st.markdown("""
-        Analytics enables organizations to convert data into knowledge. Effective analytics supports business intelligence, operational efficiency, and competitive strategy.
-
-        You'll learn how to transform raw data into actionable insights using modern tools and techniques.
+        Data analytics drives smarter business decisions by uncovering trends, quality issues, and forecasting.
         """)
 
     st.subheader("Topics Covered")
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2, gap="large")
     col1.markdown("""
-    • Types of analytics: descriptive, diagnostic, predictive, prescriptive   
-    • Exploratory data analysis (EDA) techniques  
-    • Data visualization best practices  
-    • SQL fundamentals for querying  
-    • Data quality assessment and cleaning  
+    - Descriptive, diagnostic, predictive, prescriptive analytics  
+    - Exploratory data analysis (EDA)  
+    - Data visualization best practices  
+    - SQL querying fundamentals  
+    - Data quality and cleaning  
     """)
     col2.markdown("""
-    • Building dashboards with Power BI/Tableau  
-    • Python toolkits: Pandas for data handling, Matplotlib/Seaborn for plots  
-    • Statistical concepts: sampling, hypothesis testing  
-    • Communicating insights through storytelling  
+    - Power BI/Tableau dashboards  
+    - Python (Pandas, Seaborn) tools  
+    - Statistical inference basics  
+    - Data storytelling and presentation  
     """)
 
     with st.expander("Read More: Power BI Fundamentals"):
         st.markdown("""
-        Power BI helps visualize and share insights through interactive reports. You will learn to connect to various data sources, transform data using Power Query, and create dashboards.
-
-        Understanding how to interpret these dashboards is essential for data-driven decisions.
+        Power BI simplifies connections to diverse data, allowing transformation, modeling, and interactive report generation.
         """)
 
-    with st.expander("Example: Basic Sales Data Analysis in Python"):
+    with st.expander("Example: Sales Data Analysis Code"):
         st.code("""
 import pandas as pd
 
@@ -196,179 +209,155 @@ top_products = sales_df_clean.groupby('Product')['Revenue'].sum().nlargest(5)
 print(top_products)
         """)
 
-    with st.expander("Quiz: Analytics Basics"):
-        q = st.radio("Which analytics type forecasts future outcomes?", ["Descriptive", "Predictive", "Diagnostic"])
-        if st.button("Submit", key="da_quiz_submit"):
-            if q == "Predictive":
-                st.success("Correct! Predictive analytics forecasts future events.")
-            else:
-                st.error("Incorrect. Try again.")
+    box_highlight("<b>Quiz:</b> Which analytics type forecasts future outcomes?")
+    q = st.radio("", ["Descriptive", "Predictive", "Diagnostic"], key="da_quiz", horizontal=True)
+    if st.button("Submit Answer", key="da_submit"):
+        if q == "Predictive":
+            st.success("Correct! Predictive analytics forecasts future events.")
+        else:
+            st.error("Incorrect, please try again.")
 
     st.markdown("[Download Data Analytics Cheat Sheet](https://www.analyticsvidhya.com/wp-content/uploads/2020/03/Data-Analytics-Cheat-Sheet.pdf)")
-    st.button("Back to Home", on_click=lambda: go_to("home"))
+
+    st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
 
 
 # -------- EXCEL --------
 def page_excel():
-    st.title("Microsoft Excel Essentials")
-    st.video("https://www.youtube.com/watch?v=7ny5ljw6NbI")  # Updated Excel Full Course
+    section_header("Microsoft Excel Essentials")
+    st.video("https://www.youtube.com/watch?v=7ny5ljw6NbI")
 
-    st.markdown("""
-    Excel empowers you to organize, calculate, and visualize data effectively.
-
-    Key learning outcomes:
-    - Master formulas like SUM, AVERAGE, IF, VLOOKUP, and INDEX-MATCH.
-    - Create PivotTables and PivotCharts for summarizing data.
-    - Automate tasks and create custom functions using Macros and VBA.
-    - Tips for spreadsheet management and collaboration.
-    """)
+    intro_text = """
+    <p style='font-size:1.1rem;'>Excel allows you to organize, calculate, and visualize data with formulas, PivotTables, charts, and automation tools.</p>
+    """
+    st.markdown(intro_text, unsafe_allow_html=True)
 
     with st.expander("Why Excel is Important"):
         st.markdown("""
-        Excel remains one of the most widely used tools for data analysis across industries due to its flexibility and ease of use. Whether for financial modeling, reporting, or data visualization, proficiency in Excel is invaluable.
-
-        Through this course, you'll gain skills to use Excel as a powerful analytics tool.
+        Excel is ubiquitous in business analytics, finance, and reporting, making mastery highly valuable.
         """)
 
     st.subheader("Key Features Covered")
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2, gap="large")
     col1.markdown("""
-    • Cell referencing and formulas  
-    • Lookup functions: VLOOKUP & INDEX-MATCH  
-    • Data validation and conditional formatting  
-    • Working with tables and structured references  
+    - Cell referencing and formulas  
+    - Lookup functions: VLOOKUP & INDEX-MATCH  
+    - Data validation and conditional formatting  
+    - Tables and structured references  
     """)
     col2.markdown("""
-    • PivotTables and slicers  
-    • Charts and dashboards  
-    • Introduction to Macros and VBA scripting  
-    • Collaboration tools and workbook sharing  
+    - PivotTables and slicers  
+    - Charts and dashboards  
+    - Macros and VBA scripting basics  
+    - Collaboration and sharing  
     """)
 
     with st.expander("Read More: PivotTables Explained"):
         st.markdown("""
-        PivotTables help summarize large datasets with drag-and-drop ease. You learn to aggregate data by categories, filter, and analyze trends quickly.
-
-        This feature amplifies Excel’s power in transforming raw data into meaningful summaries.
+        PivotTables let you dynamically summarize and explore large datasets with interactive filtering and grouping.
         """)
 
-    with st.expander("Quiz: Excel Basics"):
-        ans = st.radio("Which function is used for horizontal lookup?", ["VLOOKUP", "HLOOKUP", "INDEX"])
-        if st.button("Submit", key="excel_quiz_submit"):
-            if ans == "HLOOKUP":
-                st.success("Correct! HLOOKUP searches rows horizontally.")
-            else:
-                st.error("Incorrect, try again.")
+    box_highlight("<b>Quiz:</b> Which function is used for horizontal lookup?")
+    ans = st.radio("", ["VLOOKUP", "HLOOKUP", "INDEX"], key="excel_quiz", horizontal=True)
+    if st.button("Submit Answer", key="excel_submit"):
+        if ans == "HLOOKUP":
+            st.success("Correct! HLOOKUP searches horizontally across rows.")
+        else:
+            st.error("Incorrect, please try again.")
 
     st.markdown("[Download Excel Cheat Sheet](https://exceljet.net/sites/default/files/ExcelJet_Excel_Cheat_Sheet_PDF.pdf)")
-    st.button("Back to Home", on_click=lambda: go_to("home"))
+
+    st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
 
 
 # -------- POWER BI --------
 def page_power_bi():
-    st.title("Microsoft Power BI Fundamentals")
+    section_header("Microsoft Power BI Fundamentals")
     st.video("https://www.youtube.com/watch?v=AGrl-H87pRU")
 
-    st.markdown("""
-    Microsoft Power BI is a powerful business analytics tool that enables you to visualize your data and share insights across your organization or embed them in an app or website.
-
-    **Learning Objectives:**
-    - Understand Power BI components: Desktop, Service, and Mobile.
-    - Learn to import and transform data using Power Query.
-    - Build interactive reports and dashboards.
-    - Use DAX (Data Analysis Expressions) for advanced data calculations.
-    - Share and collaborate on reports within your organization.
-    """)
+    intro_text = """
+    <p style='font-size:1.1rem;'>Power BI enables interactive data visualizations and business intelligence capabilities with ease, suitable for users at all levels.</p>
+    """
+    st.markdown(intro_text, unsafe_allow_html=True)
 
     with st.expander("Why Learn Power BI?"):
         st.markdown("""
-        Power BI is widely used in enterprises for its ease of use and powerful data visualization capabilities. It bridges the gap between raw data and actionable business insights, enabling fast and informed decisions.
-
-        Mastering Power BI can significantly boost your career in business intelligence and analytics.
+        Power BI bridges the gap between data and business insights by simplifying report creation, sharing, and collaboration.
         """)
 
     st.subheader("Key Features Covered")
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2, gap="large")
     col1.markdown("""
-    • Power BI Desktop interface overview  
-    • Connecting to data sources (Excel, SQL, web, etc.)  
-    • Data transformation and cleansing with Power Query  
-    • Creating visuals: charts, maps, tables  
+    - Power BI Desktop overview  
+    - Connecting to multiple data sources  
+    - Data transformation with Power Query  
+    - Creating and customizing visuals  
     """)
     col2.markdown("""
-    • Using DAX for calculated columns and measures  
-    • Designing interactive dashboards  
-    • Publishing reports to Power BI Service  
-    • Collaboration and sharing features  
+    - Using DAX for analytics calculations  
+    - Designing interactive dashboards  
+    - Publishing and sharing reports  
+    - Collaboration features  
     """)
 
     with st.expander("Read More: Introduction to Power Query"):
         st.markdown("""
-        Power Query is a data connection technology that enables you to discover, connect, combine, and refine data across a wide variety of sources.
-
-        Learning Power Query lets you prepare your data easily and efficiently for analysis.
+        Power Query allows easy data import and transformation from diverse sources without complex coding.
         """)
 
-    with st.expander("Quiz: Power BI Basics"):
-        ans = st.radio("Which Power BI component hosts your reports for sharing?", ["Power BI Desktop", "Power BI Service", "Power Query"])
-        if st.button("Submit", key="powerbi_quiz_submit"):
-            if ans == "Power BI Service":
-                st.success("Correct! Power BI Service lets you share and collaborate on reports.")
-            else:
-                st.error("Incorrect, please try again.")
+    box_highlight("<b>Quiz:</b> Which Power BI component hosts reports for sharing?")
+    ans = st.radio("", ["Power BI Desktop", "Power BI Service", "Power Query"], key="pbi_quiz", horizontal=True)
+    if st.button("Submit Answer", key="pbi_submit"):
+        if ans == "Power BI Service":
+            st.success("Correct! Power BI Service is the cloud platform for sharing reports.")
+        else:
+            st.error("Incorrect, please try again.")
 
-    st.markdown("[Download Power BI Learning Guide (PDF)](https://docs.microsoft.com/en-us/power-bi/guided-learning/power-bi-learning-guide)")
-    st.button("Back to Home", on_click=lambda: go_to("home"))
+    st.markdown("[Download Power BI Guide](https://docs.microsoft.com/en-us/power-bi/guided-learning/power-bi-learning-guide)")
+
+    st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
 
 
 # -------- ARTIFICIAL INTELLIGENCE --------
 def page_ai():
-    st.title("Artificial Intelligence (AI) Fundamentals")
-    st.video("https://www.youtube.com/watch?v=2ePf9rue1Ao")  # AI Full Course for Beginners
+    section_header("Artificial Intelligence Fundamentals")
+    st.video("https://www.youtube.com/watch?v=2ePf9rue1Ao")
 
-    st.markdown("""
-    Artificial Intelligence (AI) is the simulation of human intelligence in machines programmed to think and learn. It encompasses various fields such as machine learning, natural language processing, robotics, and computer vision.
-
-    **Core learning objectives include:**
-    - Understanding AI concepts and history.
-    - Exploring machine learning and deep learning fundamentals.
-    - Overview of neural networks and natural language processing.
-    - Ethical considerations and real-world AI applications.
-    """)
+    intro_text = """
+    <p style='font-size:1.1rem;'>Artificial Intelligence (AI) enables machines to perform tasks that typically require human intelligence, including problem-solving, perception, and decision-making.</p>
+    """
+    st.markdown(intro_text, unsafe_allow_html=True)
 
     with st.expander("Why Learn AI?"):
         st.markdown("""
-        AI is transforming industries by enabling automation, improving decision-making, and creating innovative products. Learning AI opens doors to cutting-edge technology roles and helps solve complex problems.
-
-        This course introduces you to AI's foundational principles and its practical uses.
+        AI is revolutionizing industries by automating processes and enhancing decision-making. This course provides a foundation in AI concepts and practical applications.
         """)
 
     st.subheader("Topics Covered")
     st.markdown("""
-    • History and evolution of AI  
-    • Machine learning algorithms: supervised, unsupervised, reinforcement  
-    • Fundamentals of neural networks and deep learning  
-    • Natural language processing basics  
-    • AI ethics, bias, and societal impact  
+    - History and foundations of AI  
+    - Machine Learning: supervised, unsupervised, reinforcement learning  
+    - Neural networks and deep learning basics  
+    - Natural Language Processing fundamentals  
+    - AI ethics and societal considerations  
     """)
 
     with st.expander("Read More: Neural Networks Explained"):
         st.markdown("""
-        Neural networks are computing systems inspired by the human brain. They consist of interconnected nodes (neurons) that process data in layers, enabling deep learning models to recognize patterns and make decisions.
-
-        Understanding their architecture helps grasp how AI systems learn from data.
+        Neural networks, inspired by biological brains, form the backbone of many AI applications. Understanding their layers and training mechanisms is key to mastering deep learning.
         """)
 
-    with st.expander("Quiz: AI Basics"):
-        ans = st.radio("Which AI technique involves learning from labeled data?", ["Reinforcement Learning", "Unsupervised Learning", "Supervised Learning"])
-        if st.button("Submit", key="ai_quiz_submit"):
-            if ans == "Supervised Learning":
-                st.success("Correct! Supervised learning uses labeled data.")
-            else:
-                st.error("Incorrect, please try again.")
+    box_highlight("<b>Quiz:</b> Which AI technique learns from labeled datasets?")
+    ans = st.radio("", ["Reinforcement Learning", "Unsupervised Learning", "Supervised Learning"], key="ai_quiz", horizontal=True)
+    if st.button("Submit Answer", key="ai_submit"):
+        if ans == "Supervised Learning":
+            st.success("Correct! Supervised learning requires labeled data.")
+        else:
+            st.error("Incorrect, please try again.")
 
-    st.markdown("[Download AI Fundamentals Guide (PDF)](https://ai.google/education/)")
-    st.button("Back to Home", on_click=lambda: go_to("home"))
+    st.markdown("[Download AI Fundamentals Guide](https://ai.google/education/)")
+
+    st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
 
 
 # --------------- PAGE ROUTING ---------------
@@ -386,4 +375,4 @@ elif current_page == "ai":
     page_ai()
 else:
     st.error("Page not found. Click below to return.")
-    st.button("Home", on_click=lambda: go_to("home"))
+    st.button("Back to Home", on_click=lambda: go_to("home"))
