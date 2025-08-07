@@ -35,11 +35,27 @@ def show_home():
     col1.metric("Lessons", "50+")
     col2.metric("Code Examples", "30+")
     col3.metric("Quizzes", "10+")
+    
+    section_separator("Featured Learning Videos")
+    st.markdown("Explore these curated YouTube videos to boost your learning across topics.")
+    video_cols = st.columns(3)
+    video_cols[0].video("https://www.youtube.com/watch?v=ua-CiDNNj30")  # Data Science intro
+    video_cols[1].video("https://www.youtube.com/watch?v=9J9gkqFtyYg")   # Data Analytics intro
+    video_cols[2].video("https://www.youtube.com/watch?v=8cG-VeN94Og")   # MS Excel basics
+    
+    section_separator("Connect with Ashwik Bire")
+    st.markdown(
+        """
+        Let's connect professionally! Follow my LinkedIn for data science and analytics insights, updates, and more.
+        """
+    )
+    st.markdown(f"[LinkedIn Profile]({LINKEDIN_URL})", unsafe_allow_html=True)
+
     section_separator("Getting Started")
     st.markdown(
         """
-        Use the sidebar to explore topics. Take quizzes to test yourself and watch videos for deeper understanding.
-        Download cheat sheets to keep handy.
+        Use the sidebar to explore topics. Take quizzes to test your knowledge and watch videos for deeper understanding. 
+        Download cheat sheets for offline reference.
         """
     )
 
