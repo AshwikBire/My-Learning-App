@@ -16,7 +16,7 @@ def go_to(page):
 
 # -------- HOME --------
 def page_home():
-    st.title("📚 Learn Data Science, Analytics & Excel")
+    st.title("📚 Learn Data Science, Analytics & Excel & Power BI")
     st.subheader("All-in-One Learning Platform for Beginners & Professionals")
 
     st.image(
@@ -26,21 +26,24 @@ def page_home():
     )
 
     st.markdown("### 🚀 Choose a Learning Path:")
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.button("📊 Data Science", on_click=lambda: go_to("data_science"))
     with col2:
         st.button("📈 Data Analytics", on_click=lambda: go_to("data_analytics"))
     with col3:
         st.button("📑 MS Excel", on_click=lambda: go_to("excel"))
+    with col4:
+        st.button("📊 Power BI", on_click=lambda: go_to("power_bi"))
 
     st.divider()
 
     st.subheader("🎥 Featured YouTube Tutorials")
-    col_a, col_b, col_c = st.columns(3)
-    col_a.video("https://www.youtube.com/watch?v=IBnLsKOhpyU")  # Data Science Full Course by Simplilearn (2025)
-    col_b.video("https://www.youtube.com/watch?v=DsI1vG-kXR8")  # Best Resources to Learn Data Analytics in 2025
-    col_c.video("https://www.youtube.com/watch?v=7ny5ljw6NbI")  # Advanced Excel Full Course 2025 by Simplilearn
+    col_a, col_b, col_c, col_d = st.columns(4)
+    col_a.video("https://www.youtube.com/watch?v=IBnLsKOhpyU")  # Data Science Full Course 2025
+    col_b.video("https://www.youtube.com/watch?v=DsI1vG-kXR8")  # Data Analytics 2025
+    col_c.video("https://www.youtube.com/watch?v=7ny5ljw6NbI")  # Excel Full Course 2025
+    col_d.video("https://www.youtube.com/watch?v=AGrl-H87pRU")  # Power BI Full Tutorial
 
     st.divider()
     st.markdown("### 🔗 Connect with Ashwik Bire")
@@ -261,6 +264,64 @@ def page_excel():
     st.button("⬅️ Back to Home", on_click=lambda: go_to("home"))
 
 
+# -------- POWER BI --------
+def page_power_bi():
+    st.title("📊 Microsoft Power BI Fundamentals")
+    # YouTube video tutorial for Power BI latest comprehensive course
+    st.video("https://www.youtube.com/watch?v=AGrl-H87pRU")
+
+    st.markdown("""
+    Microsoft Power BI is a powerful business analytics tool that enables you to visualize your data and share insights across your organization or embed them in an app or website.
+
+    **Learning Objectives:**
+    - Understand Power BI components: Desktop, Service, and Mobile.
+    - Learn to import and transform data using Power Query.
+    - Build interactive reports and dashboards.
+    - Use DAX (Data Analysis Expressions) for advanced data calculations.
+    - Share and collaborate on reports within your organization.
+    """)
+
+    with st.expander("💡 Why Learn Power BI?"):
+        st.markdown("""
+        Power BI is widely used in enterprises for its ease of use and powerful data visualization capabilities. It bridges the gap between raw data and actionable business insights, enabling fast and informed decisions.
+
+        Mastering Power BI can significantly boost your career in business intelligence and analytics.
+        """)
+
+    st.subheader("🔍 Key Features Covered")
+    col1, col2 = st.columns(2)
+    col1.markdown("""
+    • Power BI Desktop interface overview  
+    • Connecting to data sources (Excel, SQL, web, etc.)  
+    • Data transformation and cleansing with Power Query  
+    • Creating visuals: charts, maps, tables  
+    """)
+    col2.markdown("""
+    • Using DAX for calculated columns and measures  
+    • Designing interactive dashboards  
+    • Publishing reports to Power BI Service  
+    • Collaboration and sharing features  
+    """)
+
+    with st.expander("📚 Read More: Introduction to Power Query"):
+        st.markdown("""
+        Power Query is a data connection technology that enables you to discover, connect, combine, and refine data across a wide variety of sources.
+
+        Learning Power Query lets you prepare your data easily and efficiently for analysis.
+        """)
+
+    with st.expander("🧠 Quiz: Power BI Basics"):
+        ans = st.radio("Which Power BI component hosts your reports for sharing?", ["Power BI Desktop", "Power BI Service", "Power Query"])
+        if st.button("Submit", key="powerbi_quiz_submit"):
+            if ans == "Power BI Service":
+                st.success("✅ Correct! Power BI Service lets you share and collaborate on reports.")
+            else:
+                st.error("❌ Incorrect, please try again.")
+
+    st.markdown("📥 [Download Power BI Learning Guide (PDF)](https://docs.microsoft.com/en-us/power-bi/guided-learning/power-bi-learning-guide)")
+    st.button("⬅️ Back to Home", on_click=lambda: go_to("home"))
+
+
 # --------------- PAGE ROUTING ---------------
 if current_page == "home":
     page_home()
@@ -270,6 +331,8 @@ elif current_page == "data_analytics":
     page_data_analytics()
 elif current_page == "excel":
     page_excel()
+elif current_page == "power_bi":
+    page_power_bi()
 else:
     st.error("Page not found. Click below to return.")
     st.button("Home", on_click=lambda: go_to("home"))
