@@ -59,6 +59,7 @@ def page_data_science():
     - 🐍 Python programming with libraries like Pandas and NumPy for data manipulation.
     - 📊 Data cleaning, exploratory data analysis, and effective visualization.
     - 🤖 Machine learning concepts, including supervised, unsupervised learning, and model evaluation.
+    - ⚙️ Data Engineering fundamentals for building data pipelines.
     """)
 
     with st.expander("💡 Why Data Science?"):
@@ -75,12 +76,14 @@ def page_data_science():
     • Data structures & data manipulation  
     • Data visualization with Matplotlib and Seaborn  
     • Introduction to statistics and probability  
+    • Data wrangling techniques and handling missing data  
     """)
     col2.markdown("""
     • Machine learning workflows  
     • Regression, classification, clustering algorithms  
-    • Model validation and tuning  
+    • Model validation and hyperparameter tuning  
     • Ethics and responsible AI  
+    • Introduction to Big Data tools (Spark, Hadoop overview)  
     """)
 
     with st.expander("📚 Read More: Core Python for Data Science"):
@@ -88,6 +91,13 @@ def page_data_science():
         Python is the most popular language in data science because of its readability and vast ecosystem. Learning Python essentials—like lists, dictionaries, functions, and modules—is crucial for performing complex data operations efficiently.
 
         Libraries like Pandas provide powerful data structures and functions making data cleaning and analysis straightforward.
+        """)
+
+    with st.expander("📚 Read More: Data Visualization Best Practices"):
+        st.markdown("""
+        Effective data visualization communicates insights clearly and efficiently. Choosing the right chart and using color effectively can highlight key patterns and trends, aiding decision makers to understand data narratives better.
+
+        Learn different types of plots such as histograms, scatter plots, box plots, and heatmaps.
         """)
 
     with st.expander("💻 Example: Linear Regression in Python"):
@@ -106,6 +116,13 @@ model.fit(X, y)
 
 predicted_salary = model.predict([[6]])
 print(f'Predicted salary for 6 years experience: ${predicted_salary[0]:.2f}')
+        """)
+
+    with st.expander("📚 Read More: Machine Learning Workflow"):
+        st.markdown("""
+        The machine learning workflow involves collecting data, preprocessing, feature engineering, model selection, training, evaluation, and deployment.
+
+        Understanding this pipeline lets you build reliable models and improve them iteratively.
         """)
 
     with st.expander("🧠 Quiz"):
@@ -132,6 +149,7 @@ def page_data_analytics():
     - Data cleaning and preparation to ensure high quality.
     - Data summarization and visualization for storytelling.
     - Use of SQL and BI tools like Power BI and Tableau for interactive dashboards.
+    - Introduction to statistical inference for data-driven decisions.
     """)
 
     with st.expander("💡 Importance of Data Analytics"):
@@ -148,11 +166,13 @@ def page_data_analytics():
     • Exploratory data analysis (EDA) techniques  
     • Data visualization best practices  
     • SQL fundamentals for querying  
+    • Data quality assessment and cleaning  
     """)
     col2.markdown("""
     • Building dashboards with Power BI/Tableau  
     • Python toolkits: Pandas for data handling, Matplotlib/Seaborn for plots  
-    • Reporting and communicating insights effectively  
+    • Statistical concepts: sampling, hypothesis testing  
+    • Communicating insights through storytelling  
     """)
 
     with st.expander("📚 Read More: Power BI Fundamentals"):
@@ -197,6 +217,7 @@ def page_excel():
     - Master formulas like SUM, AVERAGE, IF, VLOOKUP, and INDEX-MATCH.
     - Create PivotTables and PivotCharts for summarizing data.
     - Automate tasks and create custom functions using Macros and VBA.
+    - Tips for spreadsheet management and collaboration.
     """)
 
     with st.expander("💡 Why Excel is Important"):
@@ -212,11 +233,13 @@ def page_excel():
     • Cell referencing and formulas  
     • Lookup functions: VLOOKUP & INDEX-MATCH  
     • Data validation and conditional formatting  
+    • Working with tables and structured references  
     """)
     col2.markdown("""
     • PivotTables and slicers  
     • Charts and dashboards  
     • Introduction to Macros and VBA scripting  
+    • Collaboration tools and workbook sharing  
     """)
 
     with st.expander("📚 Read More: PivotTables Explained"):
