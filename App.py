@@ -16,14 +16,14 @@ def go_to(page):
 
 # -------- HOME --------
 def page_home():
-    st.title("📚 Learn Data Science, Analytics, Excel, Power BI & AI")
+    st.title("📚 Learn Data Science, Analytics, Excel, Power BI, AI & Machine Learning")
     st.subheader("All-in-One Learning Platform for Beginners & Professionals")
 
     # Banner image from local repo
     st.image("banner.png", caption="Data Science & Analytics Course with Ashwik Bire", use_container_width=True)
 
     st.markdown("### 🚀 Choose a Learning Path:")
-    col1, col2, col3, col4, col5 = st.columns(5)
+    col1, col2, col3, col4, col5, col6 = st.columns(6)
     with col1:
         st.button("📊 Data Science", on_click=lambda: go_to("data_science"))
     with col2:
@@ -34,16 +34,19 @@ def page_home():
         st.button("📊 Power BI", on_click=lambda: go_to("power_bi"))
     with col5:
         st.button("🤖 Artificial Intelligence", on_click=lambda: go_to("ai"))
+    with col6:
+        st.button("📚 Machine Learning", on_click=lambda: go_to("machine_learning"))
 
     st.divider()
 
     st.subheader("🎥 Featured YouTube Tutorials")
-    col_a, col_b, col_c, col_d, col_e = st.columns(5)
+    col_a, col_b, col_c, col_d, col_e, col_f = st.columns(6)
     col_a.video("https://www.youtube.com/watch?v=IBnLsKOhpyU")  # Data Science Full Course 2025
     col_b.video("https://www.youtube.com/watch?v=DsI1vG-kXR8")  # Data Analytics 2025
     col_c.video("https://www.youtube.com/watch?v=7ny5ljw6NbI")  # Excel Full Course 2025
     col_d.video("https://www.youtube.com/watch?v=AGrl-H87pRU")  # Power BI Full Tutorial
-    col_e.video("https://www.youtube.com/watch?v=2ePf9rue1Ao")   # AI Full Course for Beginners
+    col_e.video("https://www.youtube.com/watch?v=2ePf9rue1Ao")  # AI Full Course for Beginners
+    col_f.video("https://www.youtube.com/watch?v=Gv9_4yMHFhI")  # Machine Learning Full Course
 
     st.divider()
     st.markdown("### 🔗 Connect with Ashwik Bire")
@@ -371,19 +374,68 @@ def page_ai():
     st.button("⬅️ Back to Home", on_click=lambda: go_to("home"))
 
 
-# --------------- PAGE ROUTING ---------------
-if current_page == "home":
-    page_home()
-elif current_page == "data_science":
-    page_data_science()
-elif current_page == "data_analytics":
-    page_data_analytics()
-elif current_page == "excel":
-    page_excel()
-elif current_page == "power_bi":
-    page_power_bi()
-elif current_page == "ai":
-    page_ai()
-else:
-    st.error("Page not found. Click below to return.")
-    st.button("Home", on_click=lambda: go_to("home"))
+# -------- MACHINE LEARNING --------
+def page_machine_learning():
+    st.title("📚 Machine Learning Mastery")
+    st.video("https://www.youtube.com/watch?v=Gv9_4yMHFhI")  # Machine Learning Full Course
+
+    st.markdown("""
+    Machine Learning (ML) is a subset of AI focused on building systems that learn and improve from experience without being explicitly programmed. ML drives many modern applications such as recommendation systems, fraud detection, and autonomous vehicles.
+
+    **Core topics include:**
+    - Types of ML: supervised, unsupervised, reinforcement learning.
+    - Key algorithms: linear regression, decision trees, clustering, neural networks.
+    - Model evaluation and hyperparameter tuning.
+    - Feature engineering and data preprocessing.
+    """)
+
+    with st.expander("💡 Why Machine Learning?"):
+        st.markdown("""
+        Machine Learning enables predictive and prescriptive analytics that drive smart decision-making. Understanding ML concepts and algorithms equips you with skills highly demanded in data-driven industries.
+
+        This section guides you through practical and theoretical foundations to build effective ML models.
+        """)
+
+    st.subheader("🔍 Topics Covered")
+    col1, col2 = st.columns(2)
+    col1.markdown("""
+    • Supervised learning: regression, classification  
+    • Unsupervised learning: clustering, dimensionality reduction  
+    • Reinforcement learning basics  
+    • Feature engineering and scaling techniques  
+    """)
+    col2.markdown("""
+    • Model selection and evaluation metrics  
+    • Cross-validation and hyperparameter tuning  
+    • Neural networks and deep learning introduction  
+    • Tools: scikit-learn, TensorFlow, Keras overview  
+    """)
+
+    with st.expander("💻 Example: Decision Tree Classification"):
+        st.code("""
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+
+iris = load_iris()
+X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.3, random_state=42)
+
+model = DecisionTreeClassifier()
+model.fit(X_train, y_train)
+
+predictions = model.predict(X_test)
+print(f"Accuracy: {accuracy_score(y_test, predictions):.2f}")
+        """)
+
+    with st.expander("📚 Read More: Model Evaluation Metrics"):
+        st.markdown("""
+        Understanding evaluation metrics such as accuracy, precision, recall, F1-score, and ROC-AUC is crucial for assessing model performance and making improvements.
+
+        Learn about confusion matrix and its importance in classification tasks.
+        """)
+
+    with st.expander("🧠 Quiz: Machine Learning Basics"):
+        ans = st.radio("Which ML type learns patterns without labeled data?", ["Supervised", "Unsupervised", "Reinforcement"])
+        if st.button("Submit", key="ml_quiz_submit"):
+            if ans == "
