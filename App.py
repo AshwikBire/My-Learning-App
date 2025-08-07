@@ -19,11 +19,8 @@ def page_home():
     st.title("📚 Learn Data Science, Analytics & Excel & Power BI")
     st.subheader("All-in-One Learning Platform for Beginners & Professionals")
 
-    st.image(
-        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1280&q=80",
-        caption="🚀 Empower Your Career with Data Skills",
-        use_container_width=True
-    )
+    # Banner image from local repo
+    st.image("banner.png", caption="Data Science & Analytics Course with Ashwik Bire", use_container_width=True)
 
     st.markdown("### 🚀 Choose a Learning Path:")
     col1, col2, col3, col4 = st.columns(4)
@@ -267,7 +264,6 @@ def page_excel():
 # -------- POWER BI --------
 def page_power_bi():
     st.title("📊 Microsoft Power BI Fundamentals")
-    # YouTube video tutorial for Power BI latest comprehensive course
     st.video("https://www.youtube.com/watch?v=AGrl-H87pRU")
 
     st.markdown("""
