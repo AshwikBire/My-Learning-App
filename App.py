@@ -38,9 +38,9 @@ def page_home():
 
     st.subheader("🎥 Featured YouTube Tutorials")
     col_a, col_b, col_c = st.columns(3)
-    col_a.video("https://www.youtube.com/watch?v=ua-CiDNNj30")  # DS video
-    col_b.video("https://www.youtube.com/watch?v=9J9gkqFtyYg")   # Analytics video
-    col_c.video("https://www.youtube.com/watch?v=8cG-VeN94Og")   # Excel video
+    col_a.video("https://www.youtube.com/watch?v=IBnLsKOhpyU")  # Data Science Full Course by Simplilearn (2025)
+    col_b.video("https://www.youtube.com/watch?v=DsI1vG-kXR8")  # Best Resources to Learn Data Analytics in 2025
+    col_c.video("https://www.youtube.com/watch?v=7ny5ljw6NbI")  # Advanced Excel Full Course 2025 by Simplilearn
 
     st.divider()
     st.markdown("### 🔗 Connect with Ashwik Bire")
@@ -50,7 +50,7 @@ def page_home():
 # -------- DATA SCIENCE --------
 def page_data_science():
     st.title("📊 Data Science Learning")
-    st.video("https://www.youtube.com/watch?v=Gv9_4yMHFhI")
+    st.video("https://www.youtube.com/watch?v=IBnLsKOhpyU")  # Updated full course Data Science video
 
     st.markdown("""
     Data Science is an interdisciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from structured and unstructured data.
@@ -140,7 +140,7 @@ print(f'Predicted salary for 6 years experience: ${predicted_salary[0]:.2f}')
 # -------- DATA ANALYTICS --------
 def page_data_analytics():
     st.title("📈 Data Analytics Curriculum")
-    st.video("https://www.youtube.com/watch?v=9J9gkqFtyYg")
+    st.video("https://www.youtube.com/watch?v=DsI1vG-kXR8")  # Updated analytics resource video
 
     st.markdown("""
     Data Analytics involves examining data sets to uncover patterns, trends, and insights to support decision-making.
@@ -208,7 +208,7 @@ print(top_products)
 # -------- EXCEL --------
 def page_excel():
     st.title("📑 Microsoft Excel Essentials")
-    st.video("https://www.youtube.com/watch?v=8cG-VeN94Og")
+    st.video("https://www.youtube.com/watch?v=7ny5ljw6NbI")  # Updated Excel Full Course
 
     st.markdown("""
     Excel empowers you to organize, calculate, and visualize data effectively.
