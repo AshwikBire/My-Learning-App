@@ -16,14 +16,14 @@ def go_to(page):
 
 # -------- HOME --------
 def page_home():
-    st.title("📚 Learn Data Science, Analytics & Excel & Power BI")
+    st.title("📚 Learn Data Science, Analytics, Excel, Power BI & AI")
     st.subheader("All-in-One Learning Platform for Beginners & Professionals")
 
     # Banner image from local repo
     st.image("banner.png", caption="Data Science & Analytics Course with Ashwik Bire", use_container_width=True)
 
     st.markdown("### 🚀 Choose a Learning Path:")
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
         st.button("📊 Data Science", on_click=lambda: go_to("data_science"))
     with col2:
@@ -32,15 +32,18 @@ def page_home():
         st.button("📑 MS Excel", on_click=lambda: go_to("excel"))
     with col4:
         st.button("📊 Power BI", on_click=lambda: go_to("power_bi"))
+    with col5:
+        st.button("🤖 Artificial Intelligence", on_click=lambda: go_to("ai"))
 
     st.divider()
 
     st.subheader("🎥 Featured YouTube Tutorials")
-    col_a, col_b, col_c, col_d = st.columns(4)
+    col_a, col_b, col_c, col_d, col_e = st.columns(5)
     col_a.video("https://www.youtube.com/watch?v=IBnLsKOhpyU")  # Data Science Full Course 2025
     col_b.video("https://www.youtube.com/watch?v=DsI1vG-kXR8")  # Data Analytics 2025
     col_c.video("https://www.youtube.com/watch?v=7ny5ljw6NbI")  # Excel Full Course 2025
     col_d.video("https://www.youtube.com/watch?v=AGrl-H87pRU")  # Power BI Full Tutorial
+    col_e.video("https://www.youtube.com/watch?v=2ePf9rue1Ao")   # AI Full Course for Beginners
 
     st.divider()
     st.markdown("### 🔗 Connect with Ashwik Bire")
@@ -318,6 +321,56 @@ def page_power_bi():
     st.button("⬅️ Back to Home", on_click=lambda: go_to("home"))
 
 
+# -------- ARTIFICIAL INTELLIGENCE --------
+def page_ai():
+    st.title("🤖 Artificial Intelligence (AI) Fundamentals")
+    st.video("https://www.youtube.com/watch?v=2ePf9rue1Ao")  # AI Full Course for Beginners
+
+    st.markdown("""
+    Artificial Intelligence (AI) is the simulation of human intelligence in machines programmed to think and learn. It encompasses various fields such as machine learning, natural language processing, robotics, and computer vision.
+
+    **Core learning objectives include:**
+    - Understanding AI concepts and history.
+    - Exploring machine learning and deep learning fundamentals.
+    - Overview of neural networks and natural language processing.
+    - Ethical considerations and real-world AI applications.
+    """)
+
+    with st.expander("💡 Why Learn AI?"):
+        st.markdown("""
+        AI is transforming industries by enabling automation, improving decision-making, and creating innovative products. Learning AI opens doors to cutting-edge technology roles and helps solve complex problems.
+
+        This course introduces you to AI's foundational principles and its practical uses.
+        """)
+
+    st.subheader("📘 Topics Covered")
+    st.markdown("""
+    • History and evolution of AI  
+    • Machine learning algorithms: supervised, unsupervised, reinforcement  
+    • Fundamentals of neural networks and deep learning  
+    • Natural language processing basics  
+    • AI ethics, bias, and societal impact  
+    """)
+
+    with st.expander("📚 Read More: Neural Networks Explained"):
+        st.markdown("""
+        Neural networks are computing systems inspired by the human brain. They consist of interconnected nodes (neurons) that process data in layers, enabling deep learning models to recognize patterns and make decisions.
+
+        Understanding their architecture helps grasp how AI systems learn from data.
+        """)
+
+    with st.expander("🧠 Quiz: AI Basics"):
+        ans = st.radio("Which AI technique involves learning from labeled data?", ["Reinforcement Learning", "Unsupervised Learning", "Supervised Learning"])
+        if st.button("Submit", key="ai_quiz_submit"):
+            if ans == "Supervised Learning":
+                st.success("✅ Correct! Supervised learning uses labeled data.")
+            else:
+                st.error("❌ Incorrect, please try again.")
+
+    st.markdown("📥 [Download AI Fundamentals Guide (PDF)](https://ai.google/education/)")
+    st.button("⬅️ Back to Home", on_click=lambda: go_to("home"))
+
+
 # --------------- PAGE ROUTING ---------------
 if current_page == "home":
     page_home()
@@ -329,6 +382,8 @@ elif current_page == "excel":
     page_excel()
 elif current_page == "power_bi":
     page_power_bi()
+elif current_page == "ai":
+    page_ai()
 else:
     st.error("Page not found. Click below to return.")
     st.button("Home", on_click=lambda: go_to("home"))
