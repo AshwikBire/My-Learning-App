@@ -1,213 +1,211 @@
 import streamlit as st
 
-# --- App Configuration — No logo/avatar ---
+# LinkedIn Profile
+LINKEDIN_URL = "https://linkedin.com/in/ashwik-bire-b2a000186"
+
+# Streamlit page config (wide view is better for mobile/tablets)
 st.set_page_config(
-    page_title="Data Skills Hub",
-    layout="wide",
-    initial_sidebar_state="expanded",
+    page_title="📚 Data Learning App",
+    page_icon="📊",
+    layout="wide"
 )
 
-# --- Minimal Color Styling / Container Sim ---
-st.markdown("""
-    <style>
-    html, body, [class*="css"]  {
-        background-color: #0f0f0f;
-        color: #f5f5f5;
-    }
-    .stButton>button {
-        background-color: #262730;
-        color: #f5f5f5;
-        border: none;
-        padding: 0.5rem 1rem;
-        margin-top: 10px;
-    }
-    .st-radio label {
-        color: #ddd !important;
-    }
-    .reportview-container .markdown-text-container {
-        font-size: 1rem;
-    }
-    a {
-        color: #ffd700;
-        text-decoration: none;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
 # Sidebar Navigation
-st.sidebar.title("📚 Learn with Ashwik")
-choice = st.sidebar.radio("Select Topic", ["Home", "📈 Data Science", "📊 Data Analytics", "📑 MS Excel"])
+st.sidebar.title("📖 Topics")
+page = st.sidebar.radio("Navigate", ["🏠 Home", "📊 Data Science", "📈 Data Analytics", "📑 MS Excel"])
 
-# --- Custom Divider ---
-def divider(title):
-    st.markdown(f"""---\n#### {title}\n""")
+def section_header(title):
+    st.markdown(f"---\n### {title}\n")
 
-# --- Home Page ---
-def home():
-    st.title("🎓 Data Skills Hub - Interactive Learning")
+# Home Page
+def show_home():
+    st.title("📚 Learn Data Science, Analytics & Excel")
+    st.subheader("All-In-One Learning Companion ✨")
+
     st.markdown("""
-Welcome to your personalized learning environment covering:
+    Welcome to your mobile-friendly learning hub covering:
+    - 📊 **Data Science**
+    - 📈 **Data Analytics**
+    - 📑 **Microsoft Excel**
 
-- 📈 **Data Science**
-- 📊 **Data Analytics**
-- 📑 **Microsoft Excel**
-
-Built for beginners to intermediate learners with **real examples**, **video learning**, and **interactive quizzes**.
-""")
+    Navigate through topics using the menu. Each comes with videos, quizzes, examples, and cheat sheets!
+    """)
 
     st.image(
-        "https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-        caption="Empower your career with data skills.",
-        use_container_width=True,
+        "https://images.unsplash.com/photo-1601582583202-c4e6b5c5ca58?auto=format&fit=crop&w=1200&q=80",
+        caption="Empower Your Data Journey 🚀",
+        use_container_width=True
     )
 
+    # Quick stats
     col1, col2, col3 = st.columns(3)
-    col1.metric("Modules", "3")
-    col2.metric("Code Examples", "30+")
-    col3.metric("Viewers", "1,200+")
+    col1.metric("Lessons", "50+")
+    col2.metric("Tutorials", "30+")
+    col3.metric("Quizzes", "10+")
 
-    divider("🌐 Quick Learning Videos")
-    cols = st.columns(3)
-    cols[0].video("https://www.youtube.com/watch?v=ua-CiDNNj30")  # DS
-    cols[1].video("https://www.youtube.com/watch?v=9J9gkqFtyYg")   # Analytics
-    cols[2].video("https://www.youtube.com/watch?v=8cG-VeN94Og")   # Excel
+    section_header("🎬 YouTube Learning Picks")
+    yt1, yt2, yt3 = st.columns(3)
+    yt1.video("https://www.youtube.com/watch?v=ua-CiDNNj30")  # DS
+    yt2.video("https://www.youtube.com/watch?v=9J9gkqFtyYg")   # Analytics
+    yt3.video("https://www.youtube.com/watch?v=8cG-VeN94Og")   # Excel
 
-    divider("🤝 Connect with Me")
+    section_header("🔗 Connect")
     st.markdown(f"""
-I'm Ashwik Bire, and I created this learning hub to make data education accessible to everyone.
+        **LinkedIn:** [Ashwik Bire]({LINKEDIN_URL})  
+        Get access to projects, networks, and insights!
+    """)
 
-📇 Connect with me on [LinkedIn](https://linkedin.com/in/ashwik-bire-b2a000186)
-""")
+# Data Science Page
+def show_data_science():
+    st.title("📊 Data Science Learning")
+    st.markdown("""
+    Data Science uses Python, statistics, and ML to derive insights from data.
+    """)
 
-# --- Data Science Page ---
-def data_science():
-    st.title("📈 Data Science")
-    st.markdown("Explore how data drives decisions, predictions, and innovation.")
-
-    with st.expander("🚀 Overview & Tools"):
+    with st.expander("📘 What You'll Learn"):
         st.markdown("""
-- What is Data Science?
-- Lifecycle: Data collection → Cleaning → Modeling → Evaluation
-- Python, Pandas, NumPy, Matplotlib, Scikit-Learn
-- Real-world use: AI in healthcare, risk modeling, targeted marketing
+        - 🧰 Tools: Python, Pandas, Numpy, Jupyter  
+        - 📊 Data Cleaning & Analysis  
+        - 📈 Visualizations (Matplotlib, Seaborn)  
+        - 🤖 Machine Learning Algorithms  
         """)
+
+    st.video("https://www.youtube.com/watch?v=Gv9_4yMHFhI")
 
     col1, col2 = st.columns(2)
     col1.markdown("""
-- **Python for DS**  
-- **DataFrames & Series**  
-- **Exploratory data viz**  
-""")
+    ### 📌 Python Essentials  
+    - Variables, Lists, Dictionaries  
+    - Functions & Loops  
+    - Libraries Overview
+    """)
     col2.markdown("""
-- **ML algorithms**  
-- **Supervised vs Unsupervised**  
-- **Model scoring & tuning**  
-""")
+    ### 📌 Machine Learning  
+    - Supervised & Unsupervised  
+    - Linear Regression, K-Means  
+    - Model Evaluation
+    """)
 
-    with st.expander("💡 Simple ML Code Example"):
-        st.code("""
+    with st.expander("💻 Code: Linear Regression Example"):
+        st.code('''
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 
-data = {'exp': [1,2,3,4], 'salary': [40000, 45000, 50000, 60000]}
+data = {'exp': [1, 2, 3, 4], 'salary': [35000, 40000, 50000, 55000]}
 df = pd.DataFrame(data)
-X, y = df[['exp']], df['salary']
 
-model = LinearRegression().fit(X, y)
-print("Prediction (5 yrs):", model.predict([[5]]))
-        """, language="python")
+X = df[['exp']]
+y = df['salary']
 
-    divider("🧠 Try a Quick Quiz")
-    q = st.radio("Which is a supervised ML algorithm?", ["K-Means", "Linear Regression", "DBSCAN"])
-    if st.button("Answer"):
-        st.success("Correct ✅" if q == "Linear Regression" else "❌ That's not supervised.")
+model = LinearRegression()
+model.fit(X, y)
+pred = model.predict([[5]])
+print(f"Est. Salary for 5 yrs exp: ${pred[0]:.2f}")
+        ''', language='python')
 
-    divider("📥 Resources")
+    section_header("🧠 Quick Quiz")
+    answer = st.radio("Which ML type uses labels?", ["Unsupervised", "Supervised", "Reinforcement"], key="ds_quiz")
+    if st.button("Submit", key="ds_submit"):
+        st.success("✅ Correct!") if answer == "Supervised" else st.error("❌ Try again")
+
+    section_header("📁 Cheat Sheet")
+    st.markdown("[Download: Data Science Basics](https://www.datacamp.com/community/blog/download-data-science-cheat-sheet)")
+
+# Data Analytics Page
+def show_data_analytics():
+    st.title("📈 Data Analytics Curriculum")
+
     st.markdown("""
-- [Kaggle: Learn Python](https://www.kaggle.com/learn/python)  
-- [DS Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)  
-- [Download Cheatsheet](https://www.datacamp.com/community/blog/download-data-science-cheat-sheet)
+    Learn to explore, clean, and visualize data for impactful decision-making.
     """)
 
-# --- Data Analytics Page ---
-def data_analytics():
-    st.title("📊 Data Analytics")
-    st.markdown("Understand the past, analyze the present, and forecast the future.")
-
-    with st.expander("📌 Analytics Essentials"):
+    with st.expander("📘 What's Inside?"):
         st.markdown("""
-- Four types: Descriptive, Diagnostic, Predictive, Prescriptive
-- Tools: Excel, SQL, Python, Tableau
-- Data Preparation: outliers, nulls, filters
+        - 🧹 Data Cleaning (missing values, outliers)  
+        - 📉 Descriptive vs Predictive Analytics  
+        - 🎨 Visualization & Dashboards  
+        - 🧪 SQL + Business Insights  
         """)
 
-    with st.container():
-        col1, col2 = st.columns(2)
-        col1.markdown("""
-- 📂 Cleaning & Filtering  
-- 📈 Aggregation patterns  
-- 📊 Visualizations  
-        """)
-        col2.markdown("""
-- 🧩 Pivot analysis  
-- 🔢 SQL Queries  
-- 📉 Trend decomposition  
-        """)
+    st.video("https://www.youtube.com/watch?v=9J9gkqFtyYg")
 
-    with st.expander("🧮 Sample: Product Sales Preview"):
-        st.code("""
+    col1, col2 = st.columns(2)
+    col1.markdown("""
+    ### 🔧 Tools
+    - Excel  
+    - SQL  
+    - Tableau  
+    """)
+    col2.markdown("""
+    ### 📊 Analytics Types
+    - Descriptive  
+    - Diagnostic  
+    - Predictive  
+    - Prescriptive  
+    """)
+
+    with st.expander("💻 Code: Analyzing Sales"):
+        st.code('''
+import pandas as pd
 df = pd.read_csv("sales.csv")
-top = df.groupby('Product')['Revenue'].sum().sort_values(ascending=False).head(5)
+df = df.dropna()
+top = df.groupby('product')['revenue'].sum().nlargest(5)
 print(top)
-        """)
+        ''', language="python")
 
-    divider("🧠 Quiz Time")
-    ans = st.radio("Which analytics is about **'Why did it happen?'**", ["Descriptive", "Diagnostic", "Predictive"])
-    if st.button("Check", key="quiz2"):
-        st.success("Correct ✔️" if ans == "Diagnostic" else "❌ Try again")
+    section_header("🧠 Quiz Time")
+    q = st.radio("What analytics type forecasts future?", ["Descriptive", "Diagnostic", "Predictive"], key="da_q")
+    if st.button("Submit", key="da_submit"):
+        st.success("✅ Yes, Predictive it is!") if q == "Predictive" else st.error("❌ Nope")
 
-    divider("📦 Resource Picks")
+    section_header("📁 Resource")
+    st.markdown("[Download: Analytics Cheat Sheet](https://www.analyticsvidhya.com/wp-content/uploads/2020/03/Data-Analytics-Cheat-Sheet.pdf)")
+
+# MS Excel Page
+def show_ms_excel():
+    st.title("📑 Excel Mastery Ground")
     st.markdown("""
-- [Analytics Vidhya Guide](https://www.analyticsvidhya.com/blog/2021/04/a-beginners-guide-to-data-analytics/)  
-- [W3Schools SQL](https://www.w3schools.com/sql/)  
-- [DataCamp Analyst Track](https://www.datacamp.com/tracks/data-analyst-with-python)  
-""")
+    Build data skills in spreadsheet fundamentals, dashboards, and automation.
+    """)
 
-# --- Excel Page ---
-def ms_excel():
-    st.title("📑 MS Excel Mastery")
-    st.markdown("The most powerful spreadsheet tool for analysts and business users.")
-
-    with st.expander("📋 Excel Basics"):
+    with st.expander("💻 Learn Essentials"):
         st.markdown("""
-- Formulas: `SUM`, `AVERAGE`, `IF`, `AND`, `OR`
-- Freezing, Sorting, Filtering
-- Autofill, cell references
+        - ✅ SUM, AVERAGE, IF Functions  
+        - 🔄 VLOOKUP, INDEX-MATCH  
+        - 📈 Pivot Tables & Charts  
+        - ⚙️ Macros Introduction  
         """)
-        st.video("https://www.youtube.com/watch?v=8cG-VeN94Og")
 
-    with st.expander("📊 Advanced Excel Tools"):
-        st.markdown("""
-- Pivot Tables & Charts  
-- **VLOOKUP** and **INDEX-MATCH**  
-- Conditional formatting & Macros  
-        """)
-        st.video("https://www.youtube.com/watch?v=RZP_iO3Kg_M")
+    st.video("https://www.youtube.com/watch?v=8cG-VeN94Og")
 
-    divider("📝 Quick Quiz")
-    exq = st.radio("What does `=VLOOKUP()` do?", ["Looks left", "Looks up vertically", "Sorts rows"])
-    if st.button("Submit", key="excel_q"):
-        st.success("✔️ Correct!" if exq == "Looks up vertically" else "❌ Nope!")
+    col1, col2 = st.columns(2)
+    col1.markdown("""
+    ### Shortcuts
+    - Ctrl + Arrow (jump)  
+    - Ctrl + T (table)  
+    - Alt + E + S + V (Paste special)
+    """)
+    col2.markdown("""
+    ### Tips
+    - Use Named Ranges  
+    - Use Form Control for dropdowns  
+    - Always back up formulas
+    """)
 
-    divider("📥 Download Helper")
-    st.markdown("[📄 Download Excel Cheatsheet](https://exceljet.net/sites/default/files/ExcelJet_Excel_Cheat_Sheet_PDF.pdf)")
+    section_header("📊 Quiz: Excel Basics")
+    ans = st.radio("Which formula finds horizontal value?", ["VLOOKUP", "HLOOKUP", "INDEX"], key="exc_q")
+    if st.button("Submit", key="exc_submit"):
+        st.success("🎉 Correct!") if ans == "HLOOKUP" else st.error("⛔ Try again")
 
-# --- Page Routing Logic ---
-if choice == "Home":
-    home()
-elif choice == "📈 Data Science":
-    data_science()
-elif choice == "📊 Data Analytics":
-    data_analytics()
-elif choice == "📑 MS Excel":
-    ms_excel()
+    section_header("📁 Resource")
+    st.markdown("[Download: Excel Quick Sheet](https://exceljet.net/sites/default/files/ExcelJet_Excel_Cheat_Sheet_PDF.pdf)")
+
+# Page Router
+if page.startswith("🏠"):
+    show_home()
+elif page.startswith("📊"):
+    show_data_science()
+elif page.startswith("📈"):
+    show_data_analytics()
+elif page.startswith("📑"):
+    show_ms_excel()
