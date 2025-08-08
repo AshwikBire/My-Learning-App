@@ -179,7 +179,7 @@ print(f"Predicted Salary for 6 years experience: {model.predict([[6]])[0]:.2f}")
     st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
 True)
 
-# --- ANALYTICS PAGE ---
+#Data analytics 
 def page_data_analytics():
     section_header("Data Analytics Curriculum")
     st.video("https://www.youtube.com/watch?v=DsI1vG-kXR8")
