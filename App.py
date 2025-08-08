@@ -161,8 +161,7 @@ def page_home():
 
     
 
-    st.markdown("<p style='font-size:1.1rem; color:#dfe6e9;'>Select a learning path or view all materials below.</p>", unsafe_allow_html=True)
-
+ 
 
 # --- DATA SCIENCE PAGE ---
 def page_data_science():
