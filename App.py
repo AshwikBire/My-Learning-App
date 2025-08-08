@@ -224,53 +224,92 @@ def page_ai():
 # --- MATERIAL PAGE ---
 def page_material():
     section_header("Complete Learning Materials Library")
-    st.markdown("<p style='font-size:1.12rem;'>Guides, PDFs, books, blogs, and MOOC resources categorized by your learning goals.</p>", unsafe_allow_html=True)
+    st.markdown("""
+    <p style='font-size:1.12rem;color:#dfe6e9;'>A central hub of downloadable guides, recommended books, video courses, and reading lists for all disciplines. Explore, download, and bookmark your favorites.</p>
+    """, unsafe_allow_html=True)
 
+    st.markdown("---")
     st.subheader("📝 Downloadable Guides & Cheat Sheets")
     st.markdown("""
-- 📥 [Data Science](https://www.datacamp.com/community/blog/download-data-science-cheat-sheet)
-- 📥 [Analytics](https://www.analyticsvidhya.com/wp-content/uploads/2020/03/Data-Analytics-Cheat-Sheet.pdf)
-- 📥 [Excel](https://exceljet.net/sites/default/files/ExcelJet_Excel_Cheat_Sheet_PDF.pdf)
-- 📥 [Power BI](https://docs.microsoft.com/en-us/power-bi/guided-learning/power-bi-learning-guide)
-- 📥 [AI Guide](https://ai.google/education/)
+- 📥 [Data Science Cheat Sheet PDF](https://www.datacamp.com/community/blog/download-data-science-cheat-sheet)
+- 📥 [Data Analytics Quick Reference](https://www.analyticsvidhya.com/wp-content/uploads/2020/03/Data-Analytics-Cheat-Sheet.pdf)
+- 📥 [Excel Functions & Shortcuts PDF](https://exceljet.net/sites/default/files/ExcelJet_Excel_Cheat_Sheet_PDF.pdf)
+- 📥 [Power BI Learning Guide (Microsoft)](https://docs.microsoft.com/en-us/power-bi/guided-learning/power-bi-learning-guide)
+- 📥 [AI Fundamentals Guide (Google)](https://ai.google/education/)
+- 📥 [Machine Learning Crash Course by Google](https://developers.google.com/machine-learning/crash-course)
+- 📥 [Kaggle Data Science & Machine Learning Guide](https://www.kaggle.com/learn/overview)
     """)
 
-    st.subheader("📚 Recommended Reading")
-    for topic, books in {
-        "Data Science": [
-            "*Python Data Science Handbook*", "*Hands-On ML*", "*Storytelling with Data*"
-        ],
-        "Analytics & BI": [
-            "*Data Analytics Made Accessible*", "*Data Visualization*", "*Big Book of Dashboards*"
-        ],
-        "Excel": [
-            "*Excel Bible*", "*Power Programming with VBA*", "*Dashboards and Reports*"
-        ],
-        "Power BI": [
-            "*Mastering Microsoft Power BI*", "*Power BI for Excel Analysts*"
-        ],
-        "AI": [
-            "*AI: Guide to Intelligent Systems*", "*Deep Learning*", "*Make Your Own Neural Net*"
-        ]
-    }.items():
-        with st.expander(topic):
-            for book in books: st.markdown(f"- {book}")
+    st.markdown("---")
+    st.subheader("📚 Books & Further Reading")
+    with st.expander("Data Science"):
+        st.markdown("""
+- *Python Data Science Handbook* — Jake VanderPlas ([Read Online](https://jakevdp.github.io/PythonDataScienceHandbook/))
+- *Hands-On Machine Learning with Scikit-Learn, Keras, & TensorFlow* — Aurélien Géron
+- *Storytelling With Data* — Cole Nussbaumer Knaflic
+- *Practical Statistics for Data Scientists* — Peter Bruce & Andrew Bruce
+- *Data Science from Scratch* — Joel Grus
+        """)
+    with st.expander("Analytics & BI"):
+        st.markdown("""
+- *Data Analytics Made Accessible* — A. Maheshwari
+- *Data Visualization: A Practical Intro* — Kieran Healy
+- *The Big Book of Dashboards* — Steve Wexler
+- *Naked Statistics* — Charles Wheelan
+- *Business Intelligence Guidebook* — Rick Sherman
+        """)
+    with st.expander("Excel"):
+        st.markdown("""
+- *Excel Bible* — John Walkenbach
+- *Excel Power Programming with VBA* — Michael Alexander
+- *Excel Dashboards and Reports* — Michael Alexander & John Walkenbach
+- *Power Pivot and Power BI* — Rob Collie
+- *Excel Data Analysis* — Jinjer Simon
+        """)
+    with st.expander("Power BI"):
+        st.markdown("""
+- *Mastering Microsoft Power BI* — Brett Powell
+- *Power BI for the Excel Analyst* — Wyn Hopkins
+- *The Definitive Guide to DAX* — Marco Russo & Alberto Ferrari
+- *Power Query for Power BI and Excel* — Chris Webb
+        """)
+    with st.expander("Artificial Intelligence"):
+        st.markdown("""
+- *Artificial Intelligence: A Guide to Intelligent Systems* — Michael Negnevitsky
+- *Deep Learning* — Ian Goodfellow, Yoshua Bengio, and Aaron Courville ([Free Online](https://www.deeplearningbook.org/))
+- *Make Your Own Neural Network* — Tariq Rashid
+- *AI Superpowers* — Kai-Fu Lee
+- *Reinforcement Learning: An Introduction* — Richard S. Sutton & Andrew G. Barto ([Online Version](http://incompleteideas.net/book/the-book.html))
+        """)
 
-    st.subheader("📰 Blogs & MOOCs")
+    st.markdown("---")
+    st.subheader("📰 Top Blogs & MOOC Portals")
     st.markdown("""
 - [Microsoft Learn](https://learn.microsoft.com/)
 - [Kaggle Learn](https://www.kaggle.com/learn)
 - [Google AI Blog](https://ai.googleblog.com/)
 - [Towards Data Science](https://towardsdatascience.com/)
+- [DataCamp Community](https://www.datacamp.com/community)
 - [Analytics Vidhya](https://www.analyticsvidhya.com/)
+- [Chandoo (Excel)](https://chandoo.org/wp/)
+- [Coursera Data Science Courses](https://www.coursera.org/browse/data-science)
+- [edX Data Science Courses](https://www.edx.org/learn/data-science)
+- [Udacity AI and Data Courses](https://www.udacity.com/school-of-ai)
+- [Fast.ai Deep Learning](https://www.fast.ai/)
     """)
 
-    st.subheader("🎬 YouTube Playlists")
+    st.markdown("---")
+    st.subheader("🎬 Recommended Playlists & Video Courses")
     st.markdown("""
-- [Python for Everybody](https://www.youtube.com/playlist?list=PLl_Xou7GtCi6VPp8FDiirp-1oMujyFgRO)
-- [Power BI Basics](https://www.youtube.com/playlist?list=PL1N57mwBHtN0JFoWOGou-6BjdQY7fjalY)
+- [Data Science Full Courses](https://www.youtube.com/playlist?list=PLF797E961509B4EB5)
+- [Power BI Training](https://www.youtube.com/playlist?list=PL1N57mwBHtN0JFoWOGou-6BjdQY7fjalY)
+- [Python for Everybody - Coursera](https://www.youtube.com/playlist?list=PLl_Xou7GtCi6VPp8FDiirp-1oMujyFgRO)
+- [StatQuest with Josh Starmer](https://www.youtube.com/user/joshstarmer)
+- [Andrew Ng's Machine Learning Course (Coursera)](https://www.youtube.com/playlist?list=PLkDaE6sCZn6Ec-XTbcX1uRg2_u4xOEky0)
+- [3Blue1Brown Neural Networks](https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-f6j6lVhJFiFDxP5d)
     """)
     st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
+
 
 # --- Router ---
 if current_page == "home":
