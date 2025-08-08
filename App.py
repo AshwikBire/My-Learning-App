@@ -1,39 +1,41 @@
 import streamlit as st
-import time
 
 # --- Page Setup ---
 st.set_page_config(page_title="Learning Hub", page_icon="📚", layout="wide")
 
-# Custom CSS for dark translucent background and developer style
+# Custom CSS for dark translucent background with developer style subtle grid
 custom_css = """
 <style>
-    /* Dark translucent overlay background */
+    /* Dark translucent overlay as background */
     .stApp {
         background: 
             linear-gradient(
                 rgba(0, 0, 0, 0.85), 
                 rgba(0, 0, 0, 0.85)
             ),
-            url('https://www.transparenttextures.com/patterns/cubes.png');
+            url('https://www.transparenttextures.com/patterns/cubes.png'); /* subtle developer pattern */
         background-repeat: repeat;
         background-size: 80px 80px;
-        color: #c8d6e5; 
-        transition: opacity 0.6s ease-in-out;
+        color: #c8d6e5; /* soft light text color */
     }
-    /* Content box styling */
+
+    /* Override default white boxes background to be slightly transparent */
     .css-1d391kg, .css-1d391kg {
         background-color: rgba(24, 25, 29, 0.75) !important;
         border-radius: 12px !important;
     }
-    /* Headings */
+
+    /* Headings color */
     h1, h2, h3, h4 {
         color: #81ecec !important;
     }
-    /* Links */
+
+    /* Links color */
     a {
         color: #00cec9 !important;
         text-decoration: underline;
     }
+
     /* Buttons */
     .stButton>button {
         background-color: #0984e3 !important;
@@ -41,18 +43,18 @@ custom_css = """
         border-radius: 8px !important;
         font-weight: 600 !important;
         transition: background-color 0.3s ease;
-        box-shadow: 0 0 8px #00cec9;
     }
     .stButton>button:hover {
         background-color: #74b9ff !important;
         color: #2d3436 !important;
-        box-shadow: 0 0 12px #55efc4;
     }
-    /* Radio groups */
+
+    /* Radio buttons and other inputs */
     div[role="radiogroup"] > label {
         color: #dfe6e9 !important;
     }
-    /* Expanders */
+
+    /* Expander styling */
     .streamlit-expanderHeader {
         background-color: rgba(12, 13, 17, 0.6) !important;
         border-radius: 8px !important;
@@ -67,35 +69,15 @@ st.markdown(custom_css, unsafe_allow_html=True)
 query_params = st.query_params
 current_page = query_params.get("page", "home")
 
-# Navigation Helper with simulated animated transition
+# Navigation Helper
 def go_to(page):
-    # Show loading spinner to simulate transition
-    placeholder = st.empty()
-    with placeholder.container():
-        st.markdown("<h3 style='color:#00cec9;'>Loading...</h3>", unsafe_allow_html=True)
-        with st.spinner(text="Preparing the page..."):
-            time.sleep(0.6)  # animation delay
-    placeholder.empty()
-    st.experimental_set_query_params(page=page)
+    st.query_params.page = page
 
-def fade_in_container(render_function):
-    """Simulate fade-in effect by displaying content."""
-    container = st.empty()
-    # Display nothing to simulate starting hidden state
-    container.markdown("")
-    # Render the actual content after a short delay
-    time.sleep(0.2)
-    container.empty()
-    render_function(container)
+def section_header(title):
+    st.markdown(f"<h2 style='color:#81ecec; border-bottom: 2px solid #00cec9; padding-bottom:8px;'>{title}</h2>", unsafe_allow_html=True)
 
-def section_header(title, container=None):
-    html = f"<h2 style='color:#81ecec; border-bottom: 2px solid #00cec9; padding-bottom:8px;'>{title}</h2>"
-    if container:
-        container.markdown(html, unsafe_allow_html=True)
-    else:
-        st.markdown(html, unsafe_allow_html=True)
-
-def card_button(label, key, callback, container=None):
+def card_button(label, key, callback):
+    """Render a big button with card-like style."""
     style = """
         <style>
         .stButton>button {
@@ -117,75 +99,71 @@ def card_button(label, key, callback, container=None):
         </style>
     """
     st.markdown(style, unsafe_allow_html=True)
-    if container:
-        with container:
-            st.button(label, key=key, on_click=callback)
-    else:
-        st.button(label, key=key, on_click=callback)
+    st.button(label, key=key, on_click=callback)
 
-def box_highlight(content, container=None):
-    html = f"""
+def box_highlight(content):
+    st.markdown(f"""
     <div style="background-color: rgba(0, 188, 212, 0.15); padding:10px 15px; border-radius:10px; margin-bottom:15px; box-shadow: 0 0 8px #00cec9;">
     {content}
     </div>
-    """
-    if container:
-        container.markdown(html, unsafe_allow_html=True)
-    else:
-        st.markdown(html, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 # ------------------- Pages -------------------
 
 # -------- HOME --------
 def page_home():
-    container = st.container()
-    section_header("Welcome to Data Science & Analytics with Ashwik Bire", container)
-    container.image("banner.png", caption="Data Science & Analytics Course with Ashwik Bire", use_container_width=True)
-    container.markdown("<p style='font-size:1.1rem; color:#dfe6e9;'>Select a learning path below. Each includes tutorials, quizzes, and resources.</p>", unsafe_allow_html=True)
+    section_header("Welcome to Data Science & Analytics with Ashwik Bire")
 
-    cols = container.columns(5, gap="large")
-    card_button("Data Science", "btn_ds", lambda: go_to("data_science"), cols[0])
-    card_button("Data Analytics", "btn_da", lambda: go_to("data_analytics"), cols[1])
-    card_button("Microsoft Excel", "btn_excel", lambda: go_to("excel"), cols[2])
-    card_button("Power BI", "btn_pbi", lambda: go_to("power_bi"), cols[3])
-    card_button("Artificial Intelligence", "btn_ai", lambda: go_to("ai"), cols[4])
+    st.image("banner.png", caption="Data Science & Analytics Course with Ashwik Bire", use_container_width=True)
 
-    container.divider()
-    section_header("Featured Tutorials", container)
+    st.markdown("<p style='font-size:1.1rem; color:#dfe6e9;'>Select a learning path from the options below to get started. Each path includes detailed tutorials, quizzes, and resources.</p>", unsafe_allow_html=True)
 
-    vids = [
-        "https://www.youtube.com/watch?v=IBnLsKOhpyU",
-        "https://www.youtube.com/watch?v=DsI1vG-kXR8",
-        "https://www.youtube.com/watch?v=7ny5ljw6NbI",
-        "https://www.youtube.com/watch?v=AGrl-H87pRU",
-        "https://www.youtube.com/watch?v=2ePf9rue1Ao"
-    ]
-    vid_cols = container.columns(5, gap="medium")
-    for idx, url in enumerate(vids):
-        vid_cols[idx].video(url)
+    col1, col2, col3, col4, col5 = st.columns(5, gap="large")
+    with col1:
+        card_button("Data Science", "btn_ds", lambda: go_to("data_science"))
+    with col2:
+        card_button("Data Analytics", "btn_da", lambda: go_to("data_analytics"))
+    with col3:
+        card_button("Microsoft Excel", "btn_excel", lambda: go_to("excel"))
+    with col4:
+        card_button("Power BI", "btn_pbi", lambda: go_to("power_bi"))
+    with col5:
+        card_button("Artificial Intelligence", "btn_ai", lambda: go_to("ai"))
 
-    container.divider()
-    container.markdown("<p style='font-size:1.1rem; font-weight:bold; color:#55efc4;'>Connect with Ashwik Bire on <a href='https://linkedin.com/in/ashwik-bire-b2a000186' target='_blank' style='color:#00cec9;'>LinkedIn</a> for updates and mentorship.</p>", unsafe_allow_html=True)
+    st.divider()
+
+    section_header("Featured Tutorials")
+
+    col_a, col_b, col_c, col_d, col_e = st.columns(5, gap="medium")
+    col_a.video("https://www.youtube.com/watch?v=IBnLsKOhpyU")
+    col_b.video("https://www.youtube.com/watch?v=DsI1vG-kXR8")
+    col_c.video("https://www.youtube.com/watch?v=7ny5ljw6NbI")
+    col_d.video("https://www.youtube.com/watch?v=AGrl-H87pRU")
+    col_e.video("https://www.youtube.com/watch?v=2ePf9rue1Ao")
+
+    st.divider()
+
+    st.markdown("<p style='font-size:1.1rem; font-weight:bold; color:#55efc4;'>Connect with Ashwik Bire on <a href='https://linkedin.com/in/ashwik-bire-b2a000186' target='_blank' style='color:#00cec9;'>LinkedIn</a> for updates and mentorship.</p>", unsafe_allow_html=True)
 
 # -------- DATA SCIENCE --------
 def page_data_science():
-    container = st.container()
-    section_header("Data Science Learning", container)
-    container.video("https://www.youtube.com/watch?v=IBnLsKOhpyU")
+    section_header("Data Science Learning")
+
+    st.video("https://www.youtube.com/watch?v=IBnLsKOhpyU")
 
     intro_text = """
-    <p style='font-size:1.1rem; color:#dfe6e9;'>Data Science unlocks insights from complex data using statistics, programming, and algorithms. It covers data cleaning, visualization, machine learning, and engineering.</p>
+    <p style='font-size:1.1rem; color:#dfe6e9;'>Data Science unlocks insights from complex data by using statistics, programming, and algorithms. Key pathways include data cleaning, visualization, machine learning, and data engineering.</p>
     """
-    container.markdown(intro_text, unsafe_allow_html=True)
+    st.markdown(intro_text, unsafe_allow_html=True)
 
-    with container.expander("Why Data Science?"):
+    with st.expander("Why Data Science?"):
         st.markdown("""
         Data science enables data-driven decision-making, powering innovation and competitive advantages worldwide.
-        Understand data collection, cleaning, analysis, and modeling in real-world contexts.
+        Understand how data is collected, cleaned, analyzed, and modeled in real-world applications.
         """)
 
-    container.subheader("Concepts Covered")
-    col1, col2 = container.columns(2, gap="large")
+    st.subheader("Concepts Covered")
+    col1, col2 = st.columns(2, gap="large")
     col1.markdown("""
     - Python & Jupyter basics  
     - Data manipulation with Pandas  
@@ -201,17 +179,17 @@ def page_data_science():
     - Big Data tools overview  
     """)
 
-    with container.expander("Read More: Core Python for Data Science"):
+    with st.expander("Read More: Core Python for Data Science"):
         st.markdown("""
-        Python is favored in data science for readability & vast libraries. Learn lists, dictionaries, and Pandas for data operations.
+        Python is the most popular language in data science because of its readability and powerful libraries. Master lists, dictionaries, and Pandas functions for effective data operations.
         """)
 
-    with container.expander("Read More: Data Visualization Best Practices"):
+    with st.expander("Read More: Data Visualization Best Practices"):
         st.markdown("""
-        Visualization effectively communicates insights. Learn chart choices, colors, annotations, to tell your data story.
+        Visualizing data helps communicate findings clearly. Learn chart choices, colors, and annotations for impactful storytelling.
         """)
 
-    with container.expander("Example: Linear Regression in Python"):
+    with st.expander("Example: Linear Regression in Python"):
         st.code("""
 import pandas as pd
 from sklearn.linear_model import LinearRegression
@@ -229,41 +207,40 @@ predicted_salary = model.predict([[6]])
 print(f'Predicted salary for 6 years experience: ${predicted_salary[0]:.2f}')
         """)
 
-    with container.expander("Read More: Machine Learning Workflow"):
+    with st.expander("Read More: Machine Learning Workflow"):
         st.markdown("""
-        Learn full ML pipeline: data preprocessing, model training, evaluation, and deployment for production-ready models.
+        Learn full ML pipeline: preprocessing, model training, evaluation, and deployment.
         """)
 
     box_highlight("<b>Quiz:</b> Which machine learning approach uses labeled training data?")
-    answer = container.radio("", ["Unsupervised", "Supervised", "Reinforcement"], key="ds_quiz", horizontal=True)
-    if container.button("Submit Answer", key="ds_submit"):
+    answer = st.radio("", ["Unsupervised", "Supervised", "Reinforcement"], key="ds_quiz", horizontal=True)
+    if st.button("Submit Answer", key="ds_submit"):
         if answer == "Supervised":
             st.success("Correct! Supervised learning uses labeled data.")
         else:
             st.error("Incorrect, try again.")
 
-    container.markdown("[Download Data Science Cheat Sheet](https://www.datacamp.com/community/blog/download-data-science-cheat-sheet)")
+    st.markdown("[Download Data Science Cheat Sheet](https://www.datacamp.com/community/blog/download-data-science-cheat-sheet)")
 
-    container.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
+    st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
 
 # -------- DATA ANALYTICS --------
 def page_data_analytics():
-    container = st.container()
-    section_header("Data Analytics Curriculum", container)
-    container.video("https://www.youtube.com/watch?v=DsI1vG-kXR8")
+    section_header("Data Analytics Curriculum")
+    st.video("https://www.youtube.com/watch?v=DsI1vG-kXR8")
 
     intro_text = """
-    <p style='font-size:1.1rem; color:#dfe6e9;'>Data Analytics transforms raw data into actionable insights using SQL, Python, and BI tools through cleaning and visualization.</p>
+    <p style='font-size:1.1rem; color:#dfe6e9;'>Data Analytics transforms raw information into actionable insights through cleaning, visualization, and summarization using SQL, Python, and BI tools.</p>
     """
-    container.markdown(intro_text, unsafe_allow_html=True)
+    st.markdown(intro_text, unsafe_allow_html=True)
 
-    with container.expander("Importance of Data Analytics"):
+    with st.expander("Importance of Data Analytics"):
         st.markdown("""
-        Analytics supports smarter business decisions by uncovering trends and forecasting.
+        Data analytics drives smarter business decisions by uncovering trends and forecasting.
         """)
 
-    container.subheader("Topics Covered")
-    col1, col2 = container.columns(2, gap="large")
+    st.subheader("Topics Covered")
+    col1, col2 = st.columns(2, gap="large")
     col1.markdown("""
     - Descriptive, diagnostic, predictive, prescriptive analytics  
     - Exploratory data analysis (EDA)  
@@ -278,12 +255,12 @@ def page_data_analytics():
     - Data storytelling  
     """)
 
-    with container.expander("Read More: Power BI Fundamentals"):
+    with st.expander("Read More: Power BI Fundamentals"):
         st.markdown("""
-        Power BI makes data connection, transformation, modeling, and reporting easier than ever.
+        Power BI simplifies data connection, transformation, modeling, and reporting.
         """)
 
-    with container.expander("Example: Sales Data Analysis Code"):
+    with st.expander("Example: Sales Data Analysis Code"):
         st.code("""
 import pandas as pd
 
@@ -295,35 +272,34 @@ print(top_products)
         """)
 
     box_highlight("<b>Quiz:</b> Which analytics type forecasts future outcomes?")
-    q = container.radio("", ["Descriptive", "Predictive", "Diagnostic"], key="da_quiz", horizontal=True)
-    if container.button("Submit Answer", key="da_submit"):
+    q = st.radio("", ["Descriptive", "Predictive", "Diagnostic"], key="da_quiz", horizontal=True)
+    if st.button("Submit Answer", key="da_submit"):
         if q == "Predictive":
             st.success("Correct! Predictive analytics forecasts future events.")
         else:
             st.error("Incorrect, try again.")
 
-    container.markdown("[Download Data Analytics Cheat Sheet](https://www.analyticsvidhya.com/wp-content/uploads/2020/03/Data-Analytics-Cheat-Sheet.pdf)")
+    st.markdown("[Download Data Analytics Cheat Sheet](https://www.analyticsvidhya.com/wp-content/uploads/2020/03/Data-Analytics-Cheat-Sheet.pdf)")
 
-    container.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
+    st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
 
 # -------- EXCEL --------
 def page_excel():
-    container = st.container()
-    section_header("Microsoft Excel Essentials", container)
-    container.video("https://www.youtube.com/watch?v=7ny5ljw6NbI")
+    section_header("Microsoft Excel Essentials")
+    st.video("https://www.youtube.com/watch?v=7ny5ljw6NbI")
 
     intro_text = """
-    <p style='font-size:1.1rem; color:#dfe6e9;'>Excel offers powerful organizational, calculation, and visualization features with formulas, PivotTables, charts, and macros.</p>
+    <p style='font-size:1.1rem; color:#dfe6e9;'>Excel empowers you to organize, calculate, and visualize data with formulas, PivotTables, charts, and automation tools.</p>
     """
-    container.markdown(intro_text, unsafe_allow_html=True)
+    st.markdown(intro_text, unsafe_allow_html=True)
 
-    with container.expander("Why Excel is Important"):
+    with st.expander("Why Excel is Important"):
         st.markdown("""
-        Excel is critical in finance, analytics, and reporting. Mastering it can significantly boost your professional skills.
+        Excel is an indispensable tool in analytics, finance, and reporting. Mastery of Excel opens many professional doors.
         """)
 
-    container.subheader("Key Features Covered")
-    col1, col2 = container.columns(2, gap="large")
+    st.subheader("Key Features Covered")
+    col1, col2 = st.columns(2, gap="large")
     col1.markdown("""
     - Cell referencing and formulas  
     - Lookup functions: VLOOKUP & INDEX-MATCH  
@@ -337,112 +313,111 @@ def page_excel():
     - Collaboration & sharing features  
     """)
 
-    with container.expander("Read More: PivotTables Explained"):
+    with st.expander("Read More: PivotTables Explained"):
         st.markdown("""
-        PivotTables allow dynamic summary and data exploration through filtering and grouping.
+        PivotTables let you dynamically summarize and explore large datasets.
         """)
 
     box_highlight("<b>Quiz:</b> Which function is used for horizontal lookup?")
-    ans = container.radio("", ["VLOOKUP", "HLOOKUP", "INDEX"], key="excel_quiz", horizontal=True)
-    if container.button("Submit Answer", key="excel_submit"):
+    ans = st.radio("", ["VLOOKUP", "HLOOKUP", "INDEX"], key="excel_quiz", horizontal=True)
+    if st.button("Submit Answer", key="excel_submit"):
         if ans == "HLOOKUP":
-            st.success("Correct! HLOOKUP searches horizontally.")
+            st.success("Correct! HLOOKUP searches horizontally in rows.")
         else:
             st.error("Incorrect, try again.")
 
-    container.markdown("[Download Excel Cheat Sheet](https://exceljet.net/sites/default/files/ExcelJet_Excel_Cheat_Sheet_PDF.pdf)")
+    st.markdown("[Download Excel Cheat Sheet](https://exceljet.net/sites/default/files/ExcelJet_Excel_Cheat_Sheet_PDF.pdf)")
 
-    container.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
+    st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
 
 # -------- POWER BI --------
 def page_power_bi():
-    container = st.container()
-    section_header("Microsoft Power BI Fundamentals", container)
-    container.video("https://www.youtube.com/watch?v=AGrl-H87pRU")
+    section_header("Microsoft Power BI Fundamentals")
+    st.video("https://www.youtube.com/watch?v=AGrl-H87pRU")
 
     intro_text = """
-    <p style='font-size:1.1rem; color:#dfe6e9;'>Power BI is a leading business intelligence tool providing rich data visualization and collaboration capabilities.</p>
+    <p style='font-size:1.1rem; color:#dfe6e9;'>Power BI brings powerful data visualization and collaboration to organizations of all sizes.</p>
     """
-    container.markdown(intro_text, unsafe_allow_html=True)
+    st.markdown(intro_text, unsafe_allow_html=True)
 
-    with container.expander("Why Learn Power BI?"):
+    with st.expander("Why Learn Power BI?"):
         st.markdown("""
-        Power BI enables quick, interactive report creation and sharing across organizations.
+        Power BI enables quick creation of reports, dashboards, and data-driven insights.
         """)
 
-    container.subheader("Key Features Covered")
-    col1, col2 = container.columns(2, gap="large")
+    st.subheader("Key Features Covered")
+    col1, col2 = st.columns(2, gap="large")
     col1.markdown("""
-    - Power BI Desktop overview  
-    - Connecting to diverse data sources  
-    - Data preparation with Power Query  
-    - Visuals creation & customization  
+    - Power BI Desktop interface  
+    - Connecting to data sources  
+    - Power Query for data shaping  
+    - Creating visuals  
     """)
     col2.markdown("""
-    - DAX for calculations  
-    - Designing interactive dashboards  
-    - Publishing & sharing reports  
-    - Team collaboration features  
+    - Using DAX language  
+    - Interactive dashboards  
+    - Publishing and sharing reports  
+    - Collaboration tools  
     """)
 
-    with container.expander("Read More: Introduction to Power Query"):
+    with st.expander("Read More: Introduction to Power Query"):
         st.markdown("""
-        Learn how Power Query simplifies data import and transformation processes.
+        Power Query helps import, clean, and transform data simply.
         """)
 
-    box_highlight("<b>Quiz:</b> Which Power BI component is used to share reports?")
-    ans = container.radio("", ["Power BI Desktop", "Power BI Service", "Power Query"], key="pbi_quiz", horizontal=True)
-    if container.button("Submit Answer", key="pbi_submit"):
+    box_highlight("<b>Quiz:</b> Which Power BI component hosts reports for sharing?")
+    ans = st.radio("", ["Power BI Desktop", "Power BI Service", "Power Query"], key="pbi_quiz", horizontal=True)
+    if st.button("Submit Answer", key="pbi_submit"):
         if ans == "Power BI Service":
-            st.success("Correct! Power BI Service hosts shared reports.")
+            st.success("Correct! Power BI Service hosts reports for collaboration.")
         else:
             st.error("Incorrect, try again.")
 
-    container.markdown("[Download Power BI Guide](https://docs.microsoft.com/en-us/power-bi/guided-learning/power-bi-learning-guide)")
+    st.markdown("[Download Power BI Guide](https://docs.microsoft.com/en-us/power-bi/guided-learning/power-bi-learning-guide)")
 
-    container.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
+    st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
 
 # -------- ARTIFICIAL INTELLIGENCE --------
 def page_ai():
-    container = st.container()
-    section_header("Artificial Intelligence Fundamentals", container)
-    container.video("https://www.youtube.com/watch?v=2ePf9rue1Ao")
+    section_header("Artificial Intelligence Fundamentals")
+    st.video("https://www.youtube.com/watch?v=2ePf9rue1Ao")
 
     intro_text = """
-    <p style='font-size:1.1rem; color:#dfe6e9;'>AI enables machines to simulate intelligent human behavior for applications like robotics, vision, and language processing.</p>
+    <p style='font-size:1.1rem; color:#dfe6e9;'>AI enables machines to simulate intelligent human behavior, solving complex problems across industries.</p>
     """
-    container.markdown(intro_text, unsafe_allow_html=True)
+    st.markdown(intro_text, unsafe_allow_html=True)
 
-    with container.expander("Why Learn AI?"):
+    with st.expander("Why Learn AI?"):
         st.markdown("""
-        AI revolutionizes automation and decision-making. This course covers foundations and practical applications.
+        AI drives innovation in automation, decision-making, robotics, and more.
+        This course covers foundational AI principles and real-world applications.
         """)
 
-    container.subheader("Topics Covered")
-    container.markdown("""
-    - AI history & concepts  
-    - Machine Learning types: supervised, unsupervised, reinforcement  
-    - Neural networks & deep learning basics  
-    - Natural Language Processing fundamentals  
-    - AI ethics & social impact  
+    st.subheader("Topics Covered")
+    st.markdown("""
+    - AI history and concepts  
+    - Machine learning basics  
+    - Neural networks and deep learning  
+    - Natural language processing  
+    - AI ethics and social impact  
     """)
 
-    with container.expander("Read More: Neural Networks Explained"):
+    with st.expander("Read More: Neural Networks Explained"):
         st.markdown("""
-        Neural networks mimic brain structures to enable deep learning and pattern recognition.
+        Neural networks are computing systems inspired by the brain's structure for deep learning.
         """)
 
-    box_highlight("<b>Quiz:</b> Which AI technique learns from labeled data?")
-    ans = container.radio("", ["Reinforcement Learning", "Unsupervised Learning", "Supervised Learning"], key="ai_quiz", horizontal=True)
-    if container.button("Submit Answer", key="ai_submit"):
+    box_highlight("<b>Quiz:</b> Which AI technique involves learning from labeled data?")
+    ans = st.radio("", ["Reinforcement Learning", "Unsupervised Learning", "Supervised Learning"], key="ai_quiz", horizontal=True)
+    if st.button("Submit Answer", key="ai_submit"):
         if ans == "Supervised Learning":
             st.success("Correct! Supervised learning uses labeled data.")
         else:
             st.error("Incorrect, try again.")
 
-    container.markdown("[Download AI Fundamentals Guide](https://ai.google/education/)")
+    st.markdown("[Download AI Fundamentals Guide](https://ai.google/education/)")
 
-    container.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
+    st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
 
 # --------------- PAGE ROUTING ---------------
 if current_page == "home":
