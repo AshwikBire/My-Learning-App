@@ -69,12 +69,14 @@ def box_highlight(content):
 
 # --- HOME PAGE ---
 def page_home():
-    # Google Font + About Section Styling
+    # --- Google Fonts and Custom Styles ---
     st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
+    body, div, p, h1, h2, h3, h4, h5, h6 {
+        font-family: 'Inter', sans-serif !important;
+    }
     .about-section {
-        font-family: 'Inter', sans-serif;
         background-color: rgba(255, 255, 255, 0.05);
         padding: 20px 25px;
         border: 1px solid rgba(129, 236, 236, 0.25);
@@ -85,11 +87,77 @@ def page_home():
         color: #dfe6e9;
         box-shadow: 0 0 8px rgba(0, 206, 201, 0.3);
     }
+    .stButton button {
+        width: 100% !important;
+        padding: 10px 16px;
+        font-size: 0.95rem;
+        font-weight: 600 !important;
+        border-radius: 999px;
+        color: white !important;
+        background-color: #000 !important;
+        transition: background 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 206, 201, 0.2);
+    }
+    .stButton button:hover {
+        background-color: #74b9ff !important;
+        color: #2d3436 !important;
+    }
     </style>
     """, unsafe_allow_html=True)
 
+    # --- Header and Banner Image ---
     section_header("Welcome to Data Science & Analytics with Ashwik Bire")
     st.image("banner.png", caption="Data Science & Analytics Course with Ashwik Bire", use_container_width=True)
+
+    # --- ABOUT SECTION ---
+    st.markdown("""
+    <div class='about-section'>
+    <strong>About This Platform:</strong><br><br>
+    This Learning Hub is your gateway to mastering the world of <strong>data science, analytics, AI, Power BI, Excel</strong> and more — curated with care by <strong>Ashwik Bire</strong>. Whether you're starting your journey or leveling up, you'll discover a wide range of tutorials, quizzes, downloadable cheat sheets, book guides, and video-based learning, all organized for self-paced study.
+    </div>
+    """, unsafe_allow_html=True)
+
+    # --- NAVIGATION IN A SINGLE-LINE ---
+    labels = [
+        "📊 Data Science", 
+        "📈 Data Analytics", 
+        "📗 Excel", 
+        "📉 Power BI", 
+        "🤖 AI", 
+        "📚 Materials"
+    ]
+    pages = ["data_science", "data_analytics", "excel", "power_bi", "ai", "material"]
+
+    with st.container():
+        cols = st.columns(len(pages))
+        for i, page in enumerate(pages):
+            with cols[i]:
+                st.button(labels[i], key=f"nav_{i}", on_click=go_to, args=(page,))
+
+    # --- Divider + Tutorials Section ---
+    st.divider()
+    section_header("🎥 Featured Video Tutorials")
+
+    video_links = [
+        "https://www.youtube.com/watch?v=IBnLsKOhpyU",  # Data Science
+        "https://www.youtube.com/watch?v=DsI1vG-kXR8",  # Data Analytics
+        "https://www.youtube.com/watch?v=7ny5ljw6NbI",  # Excel
+        "https://www.youtube.com/watch?v=AGrl-H87pRU",  # Power BI
+        "https://www.youtube.com/watch?v=2ePf9rue1Ao"   # AI
+    ]
+    cols_videos = st.columns(len(video_links), gap="medium")
+    for i, link in enumerate(video_links):
+        with cols_videos[i]:
+            st.video(link)
+
+    # --- Footer / LinkedIn CTA ---
+    st.markdown("""
+    <p style='font-size:1.1rem; text-align:center; font-weight:500; color:#55efc4; margin-top:30px;'>
+    🔗 Connect with <strong>Ashwik Bire</strong> on 
+    <a href='https://linkedin.com/in/ashwik-bire-b2a000186' target='_blank'>LinkedIn</a> for updates & mentorship.
+    </p>
+    """, unsafe_allow_html=True)
+
 
     # --- 👋 ABOUT SECTION ---
     st.markdown("""
