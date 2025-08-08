@@ -123,7 +123,7 @@ def page_home():
         "📈 Data Analytics", 
         "📗 Excel", 
         "📉 Power BI", 
-        "🤖 AI", 
+        "🤖 Artificial Intelligence (AI)", 
         "📚 Materials"
     ]
     pages = ["data_science", "data_analytics", "excel", "power_bi", "ai", "material"]
