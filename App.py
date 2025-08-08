@@ -17,9 +17,9 @@ st.markdown("""
 h1, h2, h3, h4 { color: #81ecec !important; }
 a { color: #00cec9 !important; text-decoration: underline; }
 .stButton>button {
-    background-color: #000000 !important;
+    background-color: #0984e3 !important;
     color: white !important;
-    border-radius: 999px;
+    border-radius: 8px !important;
     font-weight: 600 !important;
 }
 .stButton>button:hover {
@@ -27,9 +27,8 @@ a { color: #00cec9 !important; text-decoration: underline; }
     color: #2d3436 !important;
 }
 .streamlit-expanderHeader {
-    background-color: rgb(0,0,0) !important;
-    border-radius: 999px;
-
+    background-color: rgba(12,13,17,0.6) !important;
+    border-radius: 8px !important;
     color: #55efc4 !important;
 }
 </style>
@@ -85,199 +84,78 @@ def page_home():
 def page_data_science():
     section_header("Data Science Learning")
     st.video("https://www.youtube.com/watch?v=IBnLsKOhpyU")
-    st.markdown("<p style='font-size:1.1rem; color:#dfe6e9;'>Data Science unlocks insights from complex data using statistics, programming, and algorithms, empowering data-driven decision-making across industries.</p>", unsafe_allow_html=True)
-    
+    st.markdown("<p style='font-size:1.1rem; color:#dfe6e9;'>Data Science unlocks insights from complex data using statistics, programming, and algorithms.</p>", unsafe_allow_html=True)
+
     with st.expander("Why Data Science?"):
-        st.markdown("""
-Data science combines domain expertise, programming, and statistical knowledge to extract actionable insights from raw data. It drives innovation in healthcare, finance, marketing, and more.
-- Understand customer trends and behaviors
-- Optimize business operations
-- Build predictive models for forecasting
-- Support evidence-based policy making
-""")
+        st.markdown("Data science enables data-driven decision-making and innovation in real-world applications.")
 
-    st.subheader("Core Concepts and Tools Covered")
+    # Topics
+    st.subheader("Concepts Covered")
     col1, col2 = st.columns(2)
-    col1.markdown("""
-- Python programming & Jupyter notebooks  
-- Data manipulation with Pandas and NumPy  
-- Data visualization with Matplotlib, Seaborn, Plotly  
-- Exploratory Data Analysis (EDA)  
-- Statistics and probability theory fundamentals  
-- Data cleaning and preprocessing techniques  
-- Feature engineering and selection  
-""")
-    col2.markdown("""
-- Machine Learning: supervised, unsupervised, semi-supervised  
-- Regression, classification, clustering algorithms  
-- Model evaluation and cross-validation  
-- Deep Learning basics and frameworks (TensorFlow, PyTorch)  
-- Natural Language Processing (NLP) introduction  
-- Big Data tools and cloud computing essentials  
-- Ethics in AI and data privacy considerations  
-""")
+    col1.markdown("""- Python & Jupyter basics  
+- Data manipulation with Pandas  
+- Data viz (Matplotlib, Seaborn)  
+- Statistics & Probability  
+- Data cleaning/wrangling""")
+    col2.markdown("""- ML fundamentals  
+- Regression, Classification  
+- Model validation  
+- Big Data tools  
+- Ethics in data""")
 
-    with st.expander("Popular Python Libraries for Data Science"):
-        st.markdown("""
-- **Pandas**: Data manipulation and analysis  
-- **NumPy**: Numerical computing and array operations  
-- **Matplotlib & Seaborn**: Flexible data visualization  
-- **Scikit-learn**: Classic machine learning algorithms and tools  
-- **TensorFlow & PyTorch**: Deep learning frameworks  
-- **NLTK & SpaCy**: NLP libraries for text processing  
-""")
-
-    with st.expander("Practical Tips for Data Scientists"):
-        st.markdown("""
-- Always perform thorough data cleaning before modeling  
-- Visualize data to uncover patterns and outliers  
-- Start with simple models before moving to complex ones  
-- Use cross-validation for robust model evaluation  
-- Document your code and processes for reproducibility  
-- Stay current with evolving tools and techniques  
-""")
-
-    with st.expander("Example: Linear Regression in Python"):
+    with st.expander("Example: Linear Regression Code"):
         st.code("""
 import pandas as pd
 from sklearn.linear_model import LinearRegression
-
 data = {'Experience':[1,2,3,4,5], 'Salary':[45000,50000,60000,65000,70000]}
 df = pd.DataFrame(data)
+model=LinearRegression(); model.fit(df[['Experience']], df['Salary'])
+print(model.predict([[6]]))
+        """)
 
-model = LinearRegression()
-model.fit(df[['Experience']], df['Salary'])
-
-print(f"Predicted Salary for 6 years experience: {model.predict([[6]])[0]:.2f}")
-""")
-
-    box_highlight("<b>Quiz 1:</b> Which learning approach uses labeled data?")
-    answer1 = st.radio("", ["Unsupervised", "Supervised", "Reinforcement"], key="ds_quiz1", horizontal=True)
-    if st.button("Submit Answer 1", key="ds_submit1"):
-        if answer1 == "Supervised":
-            st.success("Correct! Supervised learning uses labeled data.")
-        else:
-            st.error("Incorrect, please try again.")
-
-    box_highlight("<b>Quiz 2:</b> Which algorithm type is typically used to group unlabeled data?")
-    answer2 = st.radio("", ["Regression", "Classification", "Clustering"], key="ds_quiz2", horizontal=True)
-    if st.button("Submit Answer 2", key="ds_submit2"):
-        if answer2 == "Clustering":
-            st.success("Right! Clustering groups unlabeled data based on similarity.")
-        else:
-            st.error("Try again! Clustering is for unlabeled data grouping.")
-
-    box_highlight("<b>Quiz 3:</b> Which Python library is used primarily for deep learning?")
-    answer3 = st.radio("", ["Scikit-learn", "Pandas", "TensorFlow"], key="ds_quiz3", horizontal=True)
-    if st.button("Submit Answer 3", key="ds_submit3"):
-        if answer3 == "TensorFlow":
-            st.success("Correct! TensorFlow is a popular deep learning framework.")
-        else:
-            st.error("Incorrect. TensorFlow is primarily used for deep learning.")
+    box_highlight("<b>Quiz:</b> Which learning approach uses labeled data?")
+    ans = st.radio("", ["Unsupervised", "Supervised", "Reinforcement"], key="ds_quiz", horizontal=True)
+    if st.button("Submit Answer", key="ds_submit"):
+        st.success("Correct! Supervised learning uses labeled data.") if ans == "Supervised" else st.error("Incorrect. Try again.")
 
     st.markdown("[Download Data Science Cheat Sheet](https://www.datacamp.com/community/blog/download-data-science-cheat-sheet)")
     st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
-True)
 
-#Data analytics 
+# --- ANALYTICS PAGE ---
 def page_data_analytics():
     section_header("Data Analytics Curriculum")
     st.video("https://www.youtube.com/watch?v=DsI1vG-kXR8")
-    st.markdown("<p style='font-size:1.1rem; color:#dfe6e9;'>Data Analytics transforms raw data into actionable insights using statistical analysis, data visualization, and business intelligence tools.</p>", unsafe_allow_html=True)
-    
-    with st.expander("Importance of Data Analytics"):
-        st.markdown("""
-Data Analytics helps organizations make informed decisions by:
-- Uncovering patterns and trends from data  
-- Forecasting future outcomes to guide strategy  
-- Optimizing business processes and efficiency  
-- Improving customer targeting and personalization  
-- Enhancing operational performance through data-driven insights
-Analytics bridges technical skills and business knowledge to deliver impactful results.
-""")
+    st.markdown("<p style='font-size:1.1rem; color:#dfe6e9;'>Data Analytics transforms info into insights using SQL, Python, and BI tools.</p>", unsafe_allow_html=True)
 
-    st.subheader("Core Concepts and Techniques Covered")
+    with st.expander("Why Analytics?"):
+        st.markdown("Analytics drives informed strategic decisions across industries.")
+
+    st.subheader("Topics Covered")
     col1, col2 = st.columns(2)
-    col1.markdown("""
-- Descriptive analytics: Understanding what has happened  
-- Diagnostic analytics: Explaining why it happened  
-- Predictive analytics: Forecasting possible futures  
-- Prescriptive analytics: Recommending actions  
-- Data visualization principles and tools  
-- SQL fundamentals for querying databases  
-- Data cleaning and quality assurance techniques  
-""")
-    col2.markdown("""
-- Business Intelligence tools (Power BI, Tableau)  
-- Python for analytics: Pandas, NumPy, Seaborn  
-- Statistical inference and hypothesis testing  
-- Dashboard design and storytelling with data  
-- Time series analysis basics  
-- Data governance and ethics  
-""")
+    col1.markdown("""- Descriptive, diagnostic, predictive  
+- SQL basics  
+- Visualization  
+- Data quality""")
+    col2.markdown("""- BI dashboards  
+- Python (Pandas, Seaborn)  
+- Statistical inference  
+- Storytelling""")
 
-    with st.expander("Popular Data Analytics Tools and Libraries"):
-        st.markdown("""
-- **SQL**: Structured Query Language for database access  
-- **Pandas & NumPy**: For data manipulation and numerical computing  
-- **Seaborn & Matplotlib**: Visualizing data distributions and trends  
-- **Power BI & Tableau**: Interactive dashboards and reporting  
-- **Statsmodels**: Statistical modeling  
-- **Jupyter Notebooks**: Interactive analytics environment  
-""")
-
-    with st.expander("Practical Tips for Effective Data Analytics"):
-        st.markdown("""
-- Always start with data cleaning before analysis  
-- Choose the right visualization to tell your data story clearly  
-- Validate findings with statistical testing where applicable  
-- Automate repetitive tasks with Python scripts or BI tools  
-- Collaborate with domain experts for context and validation  
-- Document your workflow for transparency and reproducibility  
-""")
-
-    with st.expander("Example: Sales Revenue Analysis Using Python"):
+    with st.expander("Example: Sales Analysis"):
         st.code("""
 import pandas as pd
-
 sales_df = pd.read_csv('sales_data.csv')
-# Clean data by dropping missing values
 sales_df_clean = sales_df.dropna()
+print(sales_df_clean.groupby('Product')['Revenue'].sum().nlargest(5))
+        """)
 
-# Aggregate revenue by product
-top_products = sales_df_clean.groupby('Product')['Revenue'].sum().nlargest(5)
+    box_highlight("<b>Quiz:</b> Which analytics type forecasts future outcomes?")
+    qa = st.radio("", ["Descriptive", "Predictive", "Diagnostic"], key="da_quiz", horizontal=True)
+    if st.button("Submit Answer", key="da_submit"):
+        st.success("Yes! Predictive analytics forecasts.") if qa == "Predictive" else st.error("Try again!")
 
-print("Top 5 Products by Revenue:")
-print(top_products)
-""")
-
-    box_highlight("<b>Quiz 1:</b> Which analytics type helps explain past data patterns?")
-    q1 = st.radio("", ["Descriptive", "Predictive", "Prescriptive"], key="da_quiz1", horizontal=True)
-    if st.button("Submit Answer 1", key="da_submit1"):
-        if q1 == "Descriptive":
-            st.success("Correct! Descriptive analytics summarizes past data.")
-        else:
-            st.error("Incorrect, try again.")
-
-    box_highlight("<b>Quiz 2:</b> What is the primary language for data querying?")
-    q2 = st.radio("", ["Python", "SQL", "R"], key="da_quiz2", horizontal=True)
-    if st.button("Submit Answer 2", key="da_submit2"):
-        if q2 == "SQL":
-            st.success("Correct! SQL is used for querying databases.")
-        else:
-            st.error("Incorrect. SQL is the main query language.")
-
-    box_highlight("<b>Quiz 3:</b> Which tool is best for building interactive dashboards?")
-    q3 = st.radio("", ["Power BI", "Matplotlib", "Pandas"], key="da_quiz3", horizontal=True)
-    if st.button("Submit Answer 3", key="da_submit3"):
-        if q3 == "Power BI":
-            st.success("Correct! Power BI specializes in interactive dashboards.")
-        else:
-            st.error("Incorrect. Power BI is designed for dashboards.")
-
-    st.markdown("[Download Data Analytics Cheat Sheet](https://www.analyticsvidhya.com/wp-content/uploads/2020/03/Data-Analytics-Cheat-Sheet.pdf)")
+    st.markdown("[Download Analytics Cheat Sheet](https://www.analyticsvidhya.com/wp-content/uploads/2020/03/Data-Analytics-Cheat-Sheet.pdf)")
     st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
-
 
 # --- EXCEL PAGE ---
 def page_excel():
@@ -346,93 +224,53 @@ def page_ai():
 # --- MATERIAL PAGE ---
 def page_material():
     section_header("Complete Learning Materials Library")
-    st.markdown("""
-    <p style='font-size:1.12rem;color:#dfe6e9;'>A central hub of downloadable guides, recommended books, video courses, and reading lists for all disciplines. Explore, download, and bookmark your favorites.</p>
-    """, unsafe_allow_html=True)
+    st.markdown("<p style='font-size:1.12rem;'>Guides, PDFs, books, blogs, and MOOC resources categorized by your learning goals.</p>", unsafe_allow_html=True)
 
-    st.markdown("---")
     st.subheader("📝 Downloadable Guides & Cheat Sheets")
     st.markdown("""
-- 📥 [Data Science Cheat Sheet PDF](https://www.datacamp.com/community/blog/download-data-science-cheat-sheet)
-- 📥 [Data Analytics Quick Reference](https://www.analyticsvidhya.com/wp-content/uploads/2020/03/Data-Analytics-Cheat-Sheet.pdf)
-- 📥 [Excel Functions & Shortcuts PDF](https://exceljet.net/sites/default/files/ExcelJet_Excel_Cheat_Sheet_PDF.pdf)
-- 📥 [Power BI Learning Guide (Microsoft)](https://docs.microsoft.com/en-us/power-bi/guided-learning/power-bi-learning-guide)
-- 📥 [AI Fundamentals Guide (Google)](https://ai.google/education/)
-- 📥 [Machine Learning Crash Course by Google](https://developers.google.com/machine-learning/crash-course)
-- 📥 [Kaggle Data Science & Machine Learning Guide](https://www.kaggle.com/learn/overview)
+- 📥 [Data Science](https://www.datacamp.com/community/blog/download-data-science-cheat-sheet)
+- 📥 [Analytics](https://www.analyticsvidhya.com/wp-content/uploads/2020/03/Data-Analytics-Cheat-Sheet.pdf)
+- 📥 [Excel](https://exceljet.net/sites/default/files/ExcelJet_Excel_Cheat_Sheet_PDF.pdf)
+- 📥 [Power BI](https://docs.microsoft.com/en-us/power-bi/guided-learning/power-bi-learning-guide)
+- 📥 [AI Guide](https://ai.google/education/)
     """)
 
-    st.markdown("---")
-    st.subheader("📚 Books & Further Reading")
-    with st.expander("Data Science"):
-        st.markdown("""
-- *Python Data Science Handbook* — Jake VanderPlas ([Read Online](https://jakevdp.github.io/PythonDataScienceHandbook/))
-- *Hands-On Machine Learning with Scikit-Learn, Keras, & TensorFlow* — Aurélien Géron
-- *Storytelling With Data* — Cole Nussbaumer Knaflic
-- *Practical Statistics for Data Scientists* — Peter Bruce & Andrew Bruce
-- *Data Science from Scratch* — Joel Grus
-        """)
-    with st.expander("Analytics & BI"):
-        st.markdown("""
-- *Data Analytics Made Accessible* — A. Maheshwari
-- *Data Visualization: A Practical Intro* — Kieran Healy
-- *The Big Book of Dashboards* — Steve Wexler
-- *Naked Statistics* — Charles Wheelan
-- *Business Intelligence Guidebook* — Rick Sherman
-        """)
-    with st.expander("Excel"):
-        st.markdown("""
-- *Excel Bible* — John Walkenbach
-- *Excel Power Programming with VBA* — Michael Alexander
-- *Excel Dashboards and Reports* — Michael Alexander & John Walkenbach
-- *Power Pivot and Power BI* — Rob Collie
-- *Excel Data Analysis* — Jinjer Simon
-        """)
-    with st.expander("Power BI"):
-        st.markdown("""
-- *Mastering Microsoft Power BI* — Brett Powell
-- *Power BI for the Excel Analyst* — Wyn Hopkins
-- *The Definitive Guide to DAX* — Marco Russo & Alberto Ferrari
-- *Power Query for Power BI and Excel* — Chris Webb
-        """)
-    with st.expander("Artificial Intelligence"):
-        st.markdown("""
-- *Artificial Intelligence: A Guide to Intelligent Systems* — Michael Negnevitsky
-- *Deep Learning* — Ian Goodfellow, Yoshua Bengio, and Aaron Courville ([Free Online](https://www.deeplearningbook.org/))
-- *Make Your Own Neural Network* — Tariq Rashid
-- *AI Superpowers* — Kai-Fu Lee
-- *Reinforcement Learning: An Introduction* — Richard S. Sutton & Andrew G. Barto ([Online Version](http://incompleteideas.net/book/the-book.html))
-        """)
+    st.subheader("📚 Recommended Reading")
+    for topic, books in {
+        "Data Science": [
+            "*Python Data Science Handbook*", "*Hands-On ML*", "*Storytelling with Data*"
+        ],
+        "Analytics & BI": [
+            "*Data Analytics Made Accessible*", "*Data Visualization*", "*Big Book of Dashboards*"
+        ],
+        "Excel": [
+            "*Excel Bible*", "*Power Programming with VBA*", "*Dashboards and Reports*"
+        ],
+        "Power BI": [
+            "*Mastering Microsoft Power BI*", "*Power BI for Excel Analysts*"
+        ],
+        "AI": [
+            "*AI: Guide to Intelligent Systems*", "*Deep Learning*", "*Make Your Own Neural Net*"
+        ]
+    }.items():
+        with st.expander(topic):
+            for book in books: st.markdown(f"- {book}")
 
-    st.markdown("---")
-    st.subheader("📰 Top Blogs & MOOC Portals")
+    st.subheader("📰 Blogs & MOOCs")
     st.markdown("""
 - [Microsoft Learn](https://learn.microsoft.com/)
 - [Kaggle Learn](https://www.kaggle.com/learn)
 - [Google AI Blog](https://ai.googleblog.com/)
 - [Towards Data Science](https://towardsdatascience.com/)
-- [DataCamp Community](https://www.datacamp.com/community)
 - [Analytics Vidhya](https://www.analyticsvidhya.com/)
-- [Chandoo (Excel)](https://chandoo.org/wp/)
-- [Coursera Data Science Courses](https://www.coursera.org/browse/data-science)
-- [edX Data Science Courses](https://www.edx.org/learn/data-science)
-- [Udacity AI and Data Courses](https://www.udacity.com/school-of-ai)
-- [Fast.ai Deep Learning](https://www.fast.ai/)
     """)
 
-    st.markdown("---")
-    st.subheader("🎬 Recommended Playlists & Video Courses")
+    st.subheader("🎬 YouTube Playlists")
     st.markdown("""
-- [Data Science Full Courses](https://www.youtube.com/playlist?list=PLF797E961509B4EB5)
-- [Power BI Training](https://www.youtube.com/playlist?list=PL1N57mwBHtN0JFoWOGou-6BjdQY7fjalY)
-- [Python for Everybody - Coursera](https://www.youtube.com/playlist?list=PLl_Xou7GtCi6VPp8FDiirp-1oMujyFgRO)
-- [StatQuest with Josh Starmer](https://www.youtube.com/user/joshstarmer)
-- [Andrew Ng's Machine Learning Course (Coursera)](https://www.youtube.com/playlist?list=PLkDaE6sCZn6Ec-XTbcX1uRg2_u4xOEky0)
-- [3Blue1Brown Neural Networks](https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-f6j6lVhJFiFDxP5d)
+- [Python for Everybody](https://www.youtube.com/playlist?list=PLl_Xou7GtCi6VPp8FDiirp-1oMujyFgRO)
+- [Power BI Basics](https://www.youtube.com/playlist?list=PL1N57mwBHtN0JFoWOGou-6BjdQY7fjalY)
     """)
     st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
-
-   
 
 # --- Router ---
 if current_page == "home":
@@ -452,4 +290,3 @@ elif current_page == "material":
 else:
     st.error("Page not found.")
     st.button("Back to Home", on_click=lambda: go_to("home"))
-
