@@ -49,17 +49,45 @@ def box_highlight(content):
 
 # --- HOME PAGE ---
 def page_home():
+    # Google Font + About Section Styling
+    st.markdown("""
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+    .about-section {
+        font-family: 'Inter', sans-serif;
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 20px 25px;
+        border: 1px solid rgba(129, 236, 236, 0.25);
+        border-radius: 12px;
+        margin-bottom: 25px;
+        line-height: 1.6;
+        font-size: 1.05rem;
+        color: #dfe6e9;
+        box-shadow: 0 0 8px rgba(0, 206, 201, 0.3);
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
     section_header("Welcome to Data Science & Analytics with Ashwik Bire")
     st.image("banner.png", caption="Data Science & Analytics Course with Ashwik Bire", use_container_width=True)
+
+    # --- 👋 ABOUT SECTION ---
+    st.markdown("""
+    <div class='about-section'>
+    <strong>About This Platform:</strong><br><br>
+    This Learning Hub is your gateway to mastering the world of <strong>data science, analytics, AI, Power BI, Excel</strong> and more — curated with care by <strong>Ashwik Bire</strong>. Whether you're a beginner or brushing up your skills, you'll find structured topics, video guides, quizzes, downloadable cheat sheets, and book recommendations tailored to real-world data problems.
+    </div>
+    """, unsafe_allow_html=True)
+
     st.markdown("<p style='font-size:1.1rem; color:#dfe6e9;'>Select a learning path or view all materials below.</p>", unsafe_allow_html=True)
 
     # Navigation Cards
     labels = ["Data Science", "Data Analytics", "Microsoft Excel", "Power BI", "Artificial Intelligence", "Learning Material"]
     pages = ["data_science", "data_analytics", "excel", "power_bi", "ai", "material"]
     cols = st.columns(6, gap="large")
-    for i in range(6):
+    for i, page in enumerate(pages):
         with cols[i]:
-            st.button(labels[i], key=f"btn_{i}", on_click=lambda p=pages[i]: go_to(p))
+            st.button(labels[i], key=f"btn_{i}", on_click=go_to, args=(page,))
 
     st.divider()
     section_header("Featured Tutorials")
@@ -79,6 +107,7 @@ def page_home():
     Connect with Ashwik Bire on <a href='https://linkedin.com/in/ashwik-bire-b2a000186' target='_blank'>LinkedIn</a> for updates and mentorship.
     </p>
     """, unsafe_allow_html=True)
+
 
 # --- DATA SCIENCE PAGE ---
 def page_data_science():
