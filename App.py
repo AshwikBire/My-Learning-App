@@ -183,37 +183,101 @@ True)
 def page_data_analytics():
     section_header("Data Analytics Curriculum")
     st.video("https://www.youtube.com/watch?v=DsI1vG-kXR8")
-    st.markdown("<p style='font-size:1.1rem; color:#dfe6e9;'>Data Analytics transforms info into insights using SQL, Python, and BI tools.</p>", unsafe_allow_html=True)
+    st.markdown("<p style='font-size:1.1rem; color:#dfe6e9;'>Data Analytics transforms raw data into actionable insights using statistical analysis, data visualization, and business intelligence tools.</p>", unsafe_allow_html=True)
+    
+    with st.expander("Importance of Data Analytics"):
+        st.markdown("""
+Data Analytics helps organizations make informed decisions by:
+- Uncovering patterns and trends from data  
+- Forecasting future outcomes to guide strategy  
+- Optimizing business processes and efficiency  
+- Improving customer targeting and personalization  
+- Enhancing operational performance through data-driven insights
+Analytics bridges technical skills and business knowledge to deliver impactful results.
+""")
 
-    with st.expander("Why Analytics?"):
-        st.markdown("Analytics drives informed strategic decisions across industries.")
-
-    st.subheader("Topics Covered")
+    st.subheader("Core Concepts and Techniques Covered")
     col1, col2 = st.columns(2)
-    col1.markdown("""- Descriptive, diagnostic, predictive  
-- SQL basics  
-- Visualization  
-- Data quality""")
-    col2.markdown("""- BI dashboards  
-- Python (Pandas, Seaborn)  
-- Statistical inference  
-- Storytelling""")
+    col1.markdown("""
+- Descriptive analytics: Understanding what has happened  
+- Diagnostic analytics: Explaining why it happened  
+- Predictive analytics: Forecasting possible futures  
+- Prescriptive analytics: Recommending actions  
+- Data visualization principles and tools  
+- SQL fundamentals for querying databases  
+- Data cleaning and quality assurance techniques  
+""")
+    col2.markdown("""
+- Business Intelligence tools (Power BI, Tableau)  
+- Python for analytics: Pandas, NumPy, Seaborn  
+- Statistical inference and hypothesis testing  
+- Dashboard design and storytelling with data  
+- Time series analysis basics  
+- Data governance and ethics  
+""")
 
-    with st.expander("Example: Sales Analysis"):
+    with st.expander("Popular Data Analytics Tools and Libraries"):
+        st.markdown("""
+- **SQL**: Structured Query Language for database access  
+- **Pandas & NumPy**: For data manipulation and numerical computing  
+- **Seaborn & Matplotlib**: Visualizing data distributions and trends  
+- **Power BI & Tableau**: Interactive dashboards and reporting  
+- **Statsmodels**: Statistical modeling  
+- **Jupyter Notebooks**: Interactive analytics environment  
+""")
+
+    with st.expander("Practical Tips for Effective Data Analytics"):
+        st.markdown("""
+- Always start with data cleaning before analysis  
+- Choose the right visualization to tell your data story clearly  
+- Validate findings with statistical testing where applicable  
+- Automate repetitive tasks with Python scripts or BI tools  
+- Collaborate with domain experts for context and validation  
+- Document your workflow for transparency and reproducibility  
+""")
+
+    with st.expander("Example: Sales Revenue Analysis Using Python"):
         st.code("""
 import pandas as pd
+
 sales_df = pd.read_csv('sales_data.csv')
+# Clean data by dropping missing values
 sales_df_clean = sales_df.dropna()
-print(sales_df_clean.groupby('Product')['Revenue'].sum().nlargest(5))
-        """)
 
-    box_highlight("<b>Quiz:</b> Which analytics type forecasts future outcomes?")
-    qa = st.radio("", ["Descriptive", "Predictive", "Diagnostic"], key="da_quiz", horizontal=True)
-    if st.button("Submit Answer", key="da_submit"):
-        st.success("Yes! Predictive analytics forecasts.") if qa == "Predictive" else st.error("Try again!")
+# Aggregate revenue by product
+top_products = sales_df_clean.groupby('Product')['Revenue'].sum().nlargest(5)
 
-    st.markdown("[Download Analytics Cheat Sheet](https://www.analyticsvidhya.com/wp-content/uploads/2020/03/Data-Analytics-Cheat-Sheet.pdf)")
+print("Top 5 Products by Revenue:")
+print(top_products)
+""")
+
+    box_highlight("<b>Quiz 1:</b> Which analytics type helps explain past data patterns?")
+    q1 = st.radio("", ["Descriptive", "Predictive", "Prescriptive"], key="da_quiz1", horizontal=True)
+    if st.button("Submit Answer 1", key="da_submit1"):
+        if q1 == "Descriptive":
+            st.success("Correct! Descriptive analytics summarizes past data.")
+        else:
+            st.error("Incorrect, try again.")
+
+    box_highlight("<b>Quiz 2:</b> What is the primary language for data querying?")
+    q2 = st.radio("", ["Python", "SQL", "R"], key="da_quiz2", horizontal=True)
+    if st.button("Submit Answer 2", key="da_submit2"):
+        if q2 == "SQL":
+            st.success("Correct! SQL is used for querying databases.")
+        else:
+            st.error("Incorrect. SQL is the main query language.")
+
+    box_highlight("<b>Quiz 3:</b> Which tool is best for building interactive dashboards?")
+    q3 = st.radio("", ["Power BI", "Matplotlib", "Pandas"], key="da_quiz3", horizontal=True)
+    if st.button("Submit Answer 3", key="da_submit3"):
+        if q3 == "Power BI":
+            st.success("Correct! Power BI specializes in interactive dashboards.")
+        else:
+            st.error("Incorrect. Power BI is designed for dashboards.")
+
+    st.markdown("[Download Data Analytics Cheat Sheet](https://www.analyticsvidhya.com/wp-content/uploads/2020/03/Data-Analytics-Cheat-Sheet.pdf)")
     st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
+
 
 # --- EXCEL PAGE ---
 def page_excel():
