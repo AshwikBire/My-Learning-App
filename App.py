@@ -159,13 +159,7 @@ def page_home():
     """, unsafe_allow_html=True)
 
 
-    # --- 👋 ABOUT SECTION ---
-    st.markdown("""
-    <div class='about-section'>
-    <strong>About This Platform:</strong><br><br>
-    This Learning Hub is your gateway to mastering the world of <strong>data science, analytics, AI, Power BI, Excel</strong> and more — curated with care by <strong>Ashwik Bire</strong>. Whether you're a beginner or brushing up your skills, you'll find structured topics, video guides, quizzes, downloadable cheat sheets, and book recommendations tailored to real-world data problems.
-    </div>
-    """, unsafe_allow_html=True)
+    
 
     st.markdown("<p style='font-size:1.1rem; color:#dfe6e9;'>Select a learning path or view all materials below.</p>", unsafe_allow_html=True)
 
