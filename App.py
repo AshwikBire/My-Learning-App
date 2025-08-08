@@ -36,7 +36,7 @@ a {
 
 /* Navigation buttons styling */
 .stButton > button {
-    background-color: #0984e3 !important;
+    background-color: ##A9A9A9 !important;
     color: #ffffff !important;
     border-radius: 12px !important;
     font-weight: bold;
@@ -45,7 +45,7 @@ a {
     transition: 0.3s;
 }
 .stButton > button:hover {
-    background-color: #74b9ff !important;
+    background-color: ##A9A9A9 !important;
     color: #2c3e50 !important;
     box-shadow: 0 0 8px #00cec9;
 }
