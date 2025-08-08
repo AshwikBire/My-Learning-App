@@ -19,7 +19,7 @@ a { color: #00cec9 !important; text-decoration: underline; }
 .stButton>button {
     background-color: #000000 !important;
     color: white !important;
-    border-radius: 8px !important;
+    border-radius: 999px;
     font-weight: 600 !important;
 }
 .stButton>button:hover {
