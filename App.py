@@ -17,9 +17,9 @@ st.markdown("""
 h1, h2, h3, h4 { color: #81ecec !important; }
 a { color: #00cec9 !important; text-decoration: underline; }
 .stButton>button {
-    background-color: #0984e3 !important;
+    background-color: #00000!important;
     color: white !important;
-    border-radius: 8px !important;
+    border-radius: 999px !important;
     font-weight: 600 !important;
 }
 .stButton>button:hover {
@@ -27,8 +27,8 @@ a { color: #00cec9 !important; text-decoration: underline; }
     color: #2d3436 !important;
 }
 .streamlit-expanderHeader {
-    background-color: rgba(12,13,17,0.6) !important;
-    border-radius: 8px !important;
+    background-color: rgba(0,0,0,0) !important;
+    border-radius: 999px !important;
     color: #55efc4 !important;
 }
 </style>
