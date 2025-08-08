@@ -17,7 +17,7 @@ st.markdown("""
 h1, h2, h3, h4 { color: #81ecec !important; }
 a { color: #00cec9 !important; text-decoration: underline; }
 .stButton>button {
-    background-color: #0984e3 !important;
+    background-color: #A9A9A9 !important;
     color: white !important;
     border-radius: 8px !important;
     font-weight: 600 !important;
