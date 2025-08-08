@@ -68,8 +68,8 @@ def box_highlight(content):
     st.markdown(f"<div style='background-color:rgba(0,188,212,0.15);padding:10px 15px;border-radius:10px;margin-bottom:15px;box-shadow:0 0 8px #00cec9'>{content}</div>", unsafe_allow_html=True)
 
 # --- HOME PAGE ---
-def page_home():
-    # --- Google Fonts and Custom Styles ---
+ def page_home():
+    # --- Font + Styling (only once) ---
     st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -105,52 +105,46 @@ def page_home():
     </style>
     """, unsafe_allow_html=True)
 
-    # --- Header and Banner Image ---
+    # --- Header & Banner ---
     section_header("Welcome to Data Science & Analytics with Ashwik Bire")
     st.image("banner.png", caption="Data Science & Analytics Course with Ashwik Bire", use_container_width=True)
 
-    # --- ABOUT SECTION ---
+    # --- About Section ---
     st.markdown("""
     <div class='about-section'>
     <strong>About This Platform:</strong><br><br>
-    This Learning Hub is your gateway to mastering the world of <strong>data science, analytics, AI, Power BI, Excel</strong> and more — curated with care by <strong>Ashwik Bire</strong>. Whether you're starting your journey or leveling up, you'll discover a wide range of tutorials, quizzes, downloadable cheat sheets, book guides, and video-based learning, all organized for self-paced study.
+    This Learning Hub is your gateway to mastering the world of <strong>data science, analytics, AI, Power BI, Excel</strong> and more — curated with care by <strong>Ashwik Bire</strong>. Whether you're starting your journey or leveling up, you'll discover tutorials, quizzes, cheat sheets, book guides, and video-based learning.
     </div>
     """, unsafe_allow_html=True)
 
-    # --- NAVIGATION IN A SINGLE-LINE ---
-    labels = [
-        "📊 Data Science", 
-        "📈 Data Analytics", 
-        "📗 Excel", 
-        "📉 Power BI", 
-        "🤖 Artificial Intelligence (AI)", 
-        "📚 Materials"
-    ]
+    # --- Navigation Buttons ---
+    st.markdown("### Choose a Learning Path:")
+    labels = ["📊 Data Science", "📈 Data Analytics", "📗 Excel", "📉 Power BI", "🤖 AI", "📚 Materials"]
     pages = ["data_science", "data_analytics", "excel", "power_bi", "ai", "material"]
+    cols = st.columns(len(pages))
+    for i, page in enumerate(pages):
+        with cols[i]:
+            st.button(labels[i], key=f"nav_{i}", on_click=go_to, args=(page,))
 
-    with st.container():
-        cols = st.columns(len(pages))
-        for i, page in enumerate(pages):
-            with cols[i]:
-                st.button(labels[i], key=f"nav_{i}", on_click=go_to, args=(page,))
-
-    # --- Divider + Tutorials Section ---
     st.divider()
-    section_header("🎥 Featured Video Tutorials")
 
+    # --- Featured Videos ---
+    section_header("🎥 Featured Video Tutorials")
     video_links = [
         "https://www.youtube.com/watch?v=IBnLsKOhpyU",  # Data Science
-        "https://www.youtube.com/watch?v=DsI1vG-kXR8",  # Data Analytics
+        "https://www.youtube.com/watch?v=DsI1vG-kXR8",  # Analytics
         "https://www.youtube.com/watch?v=7ny5ljw6NbI",  # Excel
         "https://www.youtube.com/watch?v=AGrl-H87pRU",  # Power BI
         "https://www.youtube.com/watch?v=2ePf9rue1Ao"   # AI
     ]
-    cols_videos = st.columns(len(video_links), gap="medium")
+    cols_videos = st.columns(len(video_links))
     for i, link in enumerate(video_links):
         with cols_videos[i]:
             st.video(link)
 
-    # --- Footer / LinkedIn CTA ---
+    st.divider()
+
+    # --- Footer ---
     st.markdown("""
     <p style='font-size:1.1rem; text-align:center; font-weight:500; color:#55efc4; margin-top:30px;'>
     🔗 Connect with <strong>Ashwik Bire</strong> on 
@@ -158,37 +152,6 @@ def page_home():
     </p>
     """, unsafe_allow_html=True)
 
-
-    
-
-    st.markdown("<p style='font-size:1.1rem; color:#dfe6e9;'>Select a learning path or view all materials below.</p>", unsafe_allow_html=True)
-
-    # Navigation Cards
-    labels = ["Data Science", "Data Analytics", "Microsoft Excel", "Power BI", "Artificial Intelligence", "Learning Material"]
-    pages = ["data_science", "data_analytics", "excel", "power_bi", "ai", "material"]
-    cols = st.columns(6, gap="large")
-    for i, page in enumerate(pages):
-        with cols[i]:
-            st.button(labels[i], key=f"btn_{i}", on_click=go_to, args=(page,))
-
-    st.divider()
-    section_header("Featured Tutorials")
-    video_links = [
-        "https://www.youtube.com/watch?v=IBnLsKOhpyU",
-        "https://www.youtube.com/watch?v=DsI1vG-kXR8",
-        "https://www.youtube.com/watch?v=7ny5ljw6NbI",
-        "https://www.youtube.com/watch?v=AGrl-H87pRU",
-        "https://www.youtube.com/watch?v=2ePf9rue1Ao"
-    ]
-    cols_videos = st.columns(5, gap="medium")
-    for i, link in enumerate(video_links):
-        cols_videos[i].video(link)
-
-    st.markdown("""
-    <p style='font-size:1.1rem; font-weight:bold; color:#55efc4;'>
-    Connect with Ashwik Bire on <a href='https://linkedin.com/in/ashwik-bire-b2a000186' target='_blank'>LinkedIn</a> for updates and mentorship.
-    </p>
-    """, unsafe_allow_html=True)
 
 
 # --- DATA SCIENCE PAGE ---
