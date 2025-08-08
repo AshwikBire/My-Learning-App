@@ -85,42 +85,99 @@ def page_home():
 def page_data_science():
     section_header("Data Science Learning")
     st.video("https://www.youtube.com/watch?v=IBnLsKOhpyU")
-    st.markdown("<p style='font-size:1.1rem; color:#dfe6e9;'>Data Science unlocks insights from complex data using statistics, programming, and algorithms.</p>", unsafe_allow_html=True)
-
+    st.markdown("<p style='font-size:1.1rem; color:#dfe6e9;'>Data Science unlocks insights from complex data using statistics, programming, and algorithms, empowering data-driven decision-making across industries.</p>", unsafe_allow_html=True)
+    
     with st.expander("Why Data Science?"):
-        st.markdown("Data science enables data-driven decision-making and innovation in real-world applications.")
+        st.markdown("""
+Data science combines domain expertise, programming, and statistical knowledge to extract actionable insights from raw data. It drives innovation in healthcare, finance, marketing, and more.
+- Understand customer trends and behaviors
+- Optimize business operations
+- Build predictive models for forecasting
+- Support evidence-based policy making
+""")
 
-    # Topics
-    st.subheader("Concepts Covered")
+    st.subheader("Core Concepts and Tools Covered")
     col1, col2 = st.columns(2)
-    col1.markdown("""- Python & Jupyter basics  
-- Data manipulation with Pandas  
-- Data viz (Matplotlib, Seaborn)  
-- Statistics & Probability  
-- Data cleaning/wrangling""")
-    col2.markdown("""- ML fundamentals  
-- Regression, Classification  
-- Model validation  
-- Big Data tools  
-- Ethics in data""")
+    col1.markdown("""
+- Python programming & Jupyter notebooks  
+- Data manipulation with Pandas and NumPy  
+- Data visualization with Matplotlib, Seaborn, Plotly  
+- Exploratory Data Analysis (EDA)  
+- Statistics and probability theory fundamentals  
+- Data cleaning and preprocessing techniques  
+- Feature engineering and selection  
+""")
+    col2.markdown("""
+- Machine Learning: supervised, unsupervised, semi-supervised  
+- Regression, classification, clustering algorithms  
+- Model evaluation and cross-validation  
+- Deep Learning basics and frameworks (TensorFlow, PyTorch)  
+- Natural Language Processing (NLP) introduction  
+- Big Data tools and cloud computing essentials  
+- Ethics in AI and data privacy considerations  
+""")
 
-    with st.expander("Example: Linear Regression Code"):
+    with st.expander("Popular Python Libraries for Data Science"):
+        st.markdown("""
+- **Pandas**: Data manipulation and analysis  
+- **NumPy**: Numerical computing and array operations  
+- **Matplotlib & Seaborn**: Flexible data visualization  
+- **Scikit-learn**: Classic machine learning algorithms and tools  
+- **TensorFlow & PyTorch**: Deep learning frameworks  
+- **NLTK & SpaCy**: NLP libraries for text processing  
+""")
+
+    with st.expander("Practical Tips for Data Scientists"):
+        st.markdown("""
+- Always perform thorough data cleaning before modeling  
+- Visualize data to uncover patterns and outliers  
+- Start with simple models before moving to complex ones  
+- Use cross-validation for robust model evaluation  
+- Document your code and processes for reproducibility  
+- Stay current with evolving tools and techniques  
+""")
+
+    with st.expander("Example: Linear Regression in Python"):
         st.code("""
 import pandas as pd
 from sklearn.linear_model import LinearRegression
+
 data = {'Experience':[1,2,3,4,5], 'Salary':[45000,50000,60000,65000,70000]}
 df = pd.DataFrame(data)
-model=LinearRegression(); model.fit(df[['Experience']], df['Salary'])
-print(model.predict([[6]]))
-        """)
 
-    box_highlight("<b>Quiz:</b> Which learning approach uses labeled data?")
-    ans = st.radio("", ["Unsupervised", "Supervised", "Reinforcement"], key="ds_quiz", horizontal=True)
-    if st.button("Submit Answer", key="ds_submit"):
-        st.success("Correct! Supervised learning uses labeled data.") if ans == "Supervised" else st.error("Incorrect. Try again.")
+model = LinearRegression()
+model.fit(df[['Experience']], df['Salary'])
+
+print(f"Predicted Salary for 6 years experience: {model.predict([[6]])[0]:.2f}")
+""")
+
+    box_highlight("<b>Quiz 1:</b> Which learning approach uses labeled data?")
+    answer1 = st.radio("", ["Unsupervised", "Supervised", "Reinforcement"], key="ds_quiz1", horizontal=True)
+    if st.button("Submit Answer 1", key="ds_submit1"):
+        if answer1 == "Supervised":
+            st.success("Correct! Supervised learning uses labeled data.")
+        else:
+            st.error("Incorrect, please try again.")
+
+    box_highlight("<b>Quiz 2:</b> Which algorithm type is typically used to group unlabeled data?")
+    answer2 = st.radio("", ["Regression", "Classification", "Clustering"], key="ds_quiz2", horizontal=True)
+    if st.button("Submit Answer 2", key="ds_submit2"):
+        if answer2 == "Clustering":
+            st.success("Right! Clustering groups unlabeled data based on similarity.")
+        else:
+            st.error("Try again! Clustering is for unlabeled data grouping.")
+
+    box_highlight("<b>Quiz 3:</b> Which Python library is used primarily for deep learning?")
+    answer3 = st.radio("", ["Scikit-learn", "Pandas", "TensorFlow"], key="ds_quiz3", horizontal=True)
+    if st.button("Submit Answer 3", key="ds_submit3"):
+        if answer3 == "TensorFlow":
+            st.success("Correct! TensorFlow is a popular deep learning framework.")
+        else:
+            st.error("Incorrect. TensorFlow is primarily used for deep learning.")
 
     st.markdown("[Download Data Science Cheat Sheet](https://www.datacamp.com/community/blog/download-data-science-cheat-sheet)")
     st.button("Back to Home", on_click=lambda: go_to("home"), use_container_width=True)
+True)
 
 # --- ANALYTICS PAGE ---
 def page_data_analytics():
