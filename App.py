@@ -163,33 +163,6 @@ def page_home():
 
     st.markdown("<p style='font-size:1.1rem; color:#dfe6e9;'>Select a learning path or view all materials below.</p>", unsafe_allow_html=True)
 
-    # Navigation Cards
-    labels = ["Data Science", "Data Analytics", "Microsoft Excel", "Power BI", "Artificial Intelligence", "Learning Material"]
-    pages = ["data_science", "data_analytics", "excel", "power_bi", "ai", "material"]
-    cols = st.columns(6, gap="large")
-    for i, page in enumerate(pages):
-        with cols[i]:
-            st.button(labels[i], key=f"btn_{i}", on_click=go_to, args=(page,))
-
-    st.divider()
-    section_header("Featured Tutorials")
-    video_links = [
-        "https://www.youtube.com/watch?v=IBnLsKOhpyU",
-        "https://www.youtube.com/watch?v=DsI1vG-kXR8",
-        "https://www.youtube.com/watch?v=7ny5ljw6NbI",
-        "https://www.youtube.com/watch?v=AGrl-H87pRU",
-        "https://www.youtube.com/watch?v=2ePf9rue1Ao"
-    ]
-    cols_videos = st.columns(5, gap="medium")
-    for i, link in enumerate(video_links):
-        cols_videos[i].video(link)
-
-    st.markdown("""
-    <p style='font-size:1.1rem; font-weight:bold; color:#55efc4;'>
-    Connect with Ashwik Bire on <a href='https://linkedin.com/in/ashwik-bire-b2a000186' target='_blank'>LinkedIn</a> for updates and mentorship.
-    </p>
-    """, unsafe_allow_html=True)
-
 
 # --- DATA SCIENCE PAGE ---
 def page_data_science():
