@@ -28,7 +28,8 @@ a { color: #00cec9 !important; text-decoration: underline; }
 }
 .streamlit-expanderHeader {
     background-color: rgb(0,0,0) !important;
-    border-radius: 8px !important;
+    border-radius: 999px;
+
     color: #55efc4 !important;
 }
 </style>
